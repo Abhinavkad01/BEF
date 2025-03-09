@@ -58,7 +58,7 @@ def plot_savings_graph():
     fig.patch.set_alpha(0)  # Transparent figure background
     ax.set_xlabel("Year", color='lightgrey')
     ax.set_ylabel("Total Savings (in Lakhs)", color='lightgrey')
-    ax.set_title("💰 Savings Growth Over Time", color='lightgrey')
+    ax.set_title("Savings Growth Over Time", color='lightgrey')
     st.pyplot(fig)
 
 # Function to show a live savings counter
