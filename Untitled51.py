@@ -31,14 +31,29 @@ st.markdown("*(Scarcity & Bandwagon Effect)*")
 
 # Fake Line Graph - Showing Savings Over Time
 st.markdown("### 📊 Savings Growth Over the Year")
-fig, ax = plt.subplots()
+
+# Create Transparent Background Graph
+fig, ax = plt.subplots(facecolor='none')  # Transparent figure background
+ax.patch.set_alpha(0)  # Set background of the axes transparent
+
+# Generate Fake Savings Data
 months = np.arange(1, 13)
 savings = np.cumsum(np.random.randint(5000, 15000, size=12))  # Fake increasing savings data
-ax.plot(months, savings, marker='o', linestyle='-', color='green')
-ax.set_xlabel("Month")
-ax.set_ylabel("Total Savings (₹)")
+
+# Plot Data with Red Line
+ax.plot(months, savings, marker='o', linestyle='-', color='red', linewidth=2)
+
+# Set Labels and Styles
+ax.set_xlabel("Month", color='white')  # White text for visibility
+ax.set_ylabel("Total Savings (₹)", color='white')
 ax.set_xticks(months)
-ax.set_title("Savings Trend Over the Year")
+ax.set_title("Savings Trend Over the Year", color='white')
+
+# Remove Background Grid
+ax.set_facecolor('none')  # Transparent axis background
+fig.patch.set_alpha(0)  # Transparent figure background
+
+# Display Graph
 st.pyplot(fig)
 
 # Commitment Bias - Video Message to Future Self
