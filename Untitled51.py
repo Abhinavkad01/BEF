@@ -113,11 +113,39 @@ elif page == "Savings Tracker":
     ax.set_ylabel("Savings (₹)", color='lightgrey')
     ax.set_title("📈 Monthly Savings Over the Year", color='lightgrey')
     st.pyplot(fig)
+
+        # Fake Goals with Progress and Amounts
+    goals = [
+        {"name": "Buy a Car", "total": 500000, "saved": random.randint(100000, 400000)},
+        {"name": "Go on a Vacation", "total": 200000, "saved": random.randint(50000, 150000)},
+        {"name": "Buy a House", "total": 2000000, "saved": random.randint(500000, 1500000)},
+        {"name": "Retirement Fund", "total": 5000000, "saved": random.randint(1000000, 4000000)}
+    ]
+    
+    completed_goals = [goal for goal in goals if goal["saved"] >= goal["total"]]
+    remaining_goals = [goal for goal in goals if goal["saved"] < goal["total"]]
+    
+    st.markdown("### ✅ Completed Goals")
+    for goal in completed_goals:
+        st.write(f"~~{goal['name']}~~ ✅ (₹{goal['total']:,})")
+    
+    st.markdown("### 🎯 Future Goals")
+    for goal in remaining_goals:
+        remaining_amount = goal["total"] - goal["saved"]
+        st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,} (Need ₹{remaining_amount:,} more)")
+    
     
     # Earn badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
+    # Temptation Bundling - Pairing Finance Tips with News
+    if st.button("Get a Quick Finance Tip & News Update!"):
+        tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
+        news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
+        st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
+
+
     # Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
