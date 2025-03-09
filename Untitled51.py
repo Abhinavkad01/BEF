@@ -56,9 +56,9 @@ def plot_savings_graph():
     ax.plot(years, savings, color="red", linewidth=2)
     ax.set_facecolor("none")  # Transparent background
     fig.patch.set_alpha(0)  # Transparent figure background
-    ax.set_xlabel("Year", color='lightgrey')
-    ax.set_ylabel("Total Savings (in Lakhs)", color='lightgrey')
-    ax.set_title("Savings Growth Over Time", color='lightgrey')
+    ax.set_xlabel("Year", color='black')
+    ax.set_ylabel("Total Savings (in Lakhs)", color='black')
+    ax.set_title("Savings Growth Over Time", color='black')
     st.pyplot(fig)
 
 # Function to show a live savings counter
@@ -126,9 +126,9 @@ elif page == "Savings Tracker":
     ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
     ax.set_facecolor("none")
     fig.patch.set_alpha(0)
-    ax.set_xlabel("Month", color='lightgrey')
-    ax.set_ylabel("Savings (₹)", color='lightgrey')
-    ax.set_title("📈 Monthly Savings Over the Year", color='lightgrey')
+    ax.set_xlabel("Month", color='black')
+    ax.set_ylabel("Savings (₹)", color='black')
+    ax.set_title("📈 Monthly Savings Over the Year", color='black')
     st.pyplot(fig)
 
         # Fake Goals with Progress and Amounts
