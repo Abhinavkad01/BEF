@@ -28,8 +28,25 @@ else:
 st.sidebar.markdown("🌟 **12,000+ users reached their savings goals this month!**")
 
 # Navigation
-page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard", "Commitment Contracts", "Financial Tips"]) 
+page = st.sidebar.radio("📌 Navigate", ["Signup", "Home", "Savings Tracker", "Leaderboard", "Commitment Contracts", "Financial Tips"]) 
 
+# Signup Page
+if page == "Signup":
+    st.title("🔐 Join Smart Savings Today")
+    st.markdown("### Take control of your financial future with our smart savings platform!")
+    
+    # Signup Form
+    name = st.text_input("👤 Full Name")
+    email = st.text_input("📧 Email Address")
+    password = st.text_input("🔑 Create Password", type="password")
+    goal_preference = st.selectbox("🎯 What’s your primary savings goal?", ["Emergency Fund", "Buy a Car", "Vacation", "Retirement", "Investment Growth"])
+    agree = st.checkbox("I agree to the terms and conditions")
+    
+    if st.button("🚀 Get Started"):
+        if name and email and password and agree:
+            st.success(f"🎉 Welcome, {name}! Your journey to smart savings starts now!")
+        else:
+            st.error("⚠️ Please fill in all fields and agree to the terms.")
 # Function to create a fake savings graph
 def plot_savings_graph():
     years = np.arange(2015, 2025, 1)
