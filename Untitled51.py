@@ -5,101 +5,82 @@
 
 
 import streamlit as st
-import time
-
-# Set up page configuration
-st.set_page_config(page_title="Financial Wellness Platform", layout="wide")
-
-# Custom Styling
-def set_styles():
-    st.markdown(
-        """
-        <style>
-        body {font-family: 'Arial', sans-serif;}
-        .stButton>button {background-color: #ff8c00; color: white; font-size: 16px; border-radius: 8px; padding: 10px;}
-        .stMetric {text-align: center; font-weight: bold;}
-        </style>
-        """, unsafe_allow_html=True
-    )
-
-set_styles()
-
-# Navigation menu
-menu = ["Home", "Sign-Up", "Dashboard", "Simulator", "Pledge"]
-choice = st.sidebar.selectbox("Navigate", menu)
+from datetime import datetime
 
 def home():
-    st.title("💰 Smart Money Management, Simplified")
-    st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
-    st.image("https://source.unsplash.com/1000x400/?finance,money")
-    st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
+    st.title("Welcome to HelloWallet India")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.info("📈 **₹15,000/year lost due to poor spending habits**")
-    with col2:
-        if st.button("🚀 Start Tracking in 30 Seconds - No Bank Details Needed"):
-            st.success("Redirecting to Sign-Up...")
-            time.sleep(1)
-            st.rerun()
+    # Social Proof & FOMO
+    st.markdown("### Join 5,00,000+ Indians securing their financial future with HelloWallet")
+    st.markdown("Your friends in Mumbai and Delhi are already using HelloWallet! Don’t be left behind.")
+    
+    # Loss Aversion Prompt
+    st.warning("Every day you delay, you lose ₹500 in unoptimized savings. Don't wait!")
+    
+    # Framing Effect
+    if st.button("Get Your Free Financial Health Report"):
+        st.session_state["page"] = "signup"
+        st.rerun()
 
 def signup():
-    st.title("📩 Sign-Up & Take Control of Your Finances")
-    st.subheader("Join now & get ₹100 Cashback After 3 Months!")
+    st.title("Sign Up for HelloWallet")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("👤 Name")
-        email = st.text_input("✉️ Email")
-    with col2:
-        income = st.number_input("💵 Monthly Income (₹)", min_value=1000, step=500)
+    # Precommitment Bias
+    choice = st.radio("Do you want to take control of your finances?", ["Yes, I want to save more", "No, I am okay losing money"])
+    if choice == "Yes, I want to save more":
+        st.session_state["page"] = "details"
+        st.rerun()
+    elif choice == "No, I am okay losing money":
+        st.error("Think again! Financial security starts today.")
+
+def details():
+    st.title("Complete Your Sign-Up in 3 Easy Steps")
     
-    if st.button("Join & Start Saving Now!"):
-        st.success(f"Welcome {name}! Redirecting to Dashboard...")
-        time.sleep(1)
+    # Step 1: Phone Number
+    phone = st.text_input("Enter your phone number (OTP will be sent)")
+    if phone:
+        st.session_state["page"] = "otp"
+        st.rerun()
+
+def otp():
+    st.title("Verify Your OTP")
+    otp_code = st.text_input("Enter OTP sent to your phone")
+    if otp_code:
+        st.session_state["page"] = "goals"
+        st.rerun()
+
+def goals():
+    st.title("Set Your Financial Goals")
+    goal = st.selectbox("What’s your biggest financial goal?", ["Save for Home", "Reduce Expenses", "Increase Investments"])
+    if st.button("Continue"):
+        st.session_state["page"] = "dashboard"
         st.rerun()
 
 def dashboard():
-    st.title("📊 Your Personalized Savings Dashboard")
-    st.subheader("You're on a **5-day savings streak!** Keep going! 🏆")
-    st.progress(60)  # Endowed Progress Effect
+    st.title("Your Personalized Financial Dashboard")
+    st.success("Congratulations! Your savings journey starts now!")
+    st.markdown("You have been auto-enrolled into a free personal finance course.")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("💰 Total Savings", "₹25,000", "+₹1,500 this month")
-    with col2:
-        st.metric("📉 Unnecessary Expenses Cut", "₹8,000", "-₹500 this week")
-    
-    st.success("**Your savings are in the top 20% of users your age! 🎉**")
-
-def simulator():
-    st.title("🔮 Future Wealth Simulator")
-    amount = st.slider("💸 How much can you save per month?", 1000, 50000, 10000)
-    years = st.slider("📅 For how many years?", 1, 20, 5)
-    future_savings = amount * years * 12
-    
-    st.success(f"If you save ₹{amount}/month, you'll have **₹{future_savings}** in {years} years! 💰")
-    st.image("https://source.unsplash.com/800x300/?success,goal")
-
-def pledge():
-    st.title("✍️ Commitment Pledge")
-    pledge_text = st.text_area("Write your personal savings pledge")
-    
-    if st.button("📜 Save Pledge"):
-        st.success("✅ Pledge Saved! Stay committed to your goals!")
-        time.sleep(1)
+    # Gamification Reward
+    st.balloons()
+    st.success("First ₹500 saved! Keep going!")
 
 def main():
-    if choice == "Home":
+    if "page" not in st.session_state:
+        st.session_state["page"] = "home"
+    
+    if st.session_state["page"] == "home":
         home()
-    elif choice == "Sign-Up":
+    elif st.session_state["page"] == "signup":
         signup()
-    elif choice == "Dashboard":
+    elif st.session_state["page"] == "details":
+        details()
+    elif st.session_state["page"] == "otp":
+        otp()
+    elif st.session_state["page"] == "goals":
+        goals()
+    elif st.session_state["page"] == "dashboard":
         dashboard()
-    elif choice == "Simulator":
-        simulator()
-    elif choice == "Pledge":
-        pledge()
 
 if __name__ == "__main__":
     main()
