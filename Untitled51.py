@@ -40,7 +40,7 @@ def plot_savings_graph():
     ax.set_ylabel("Total Savings (in Lakhs)", color='lightgrey')
     ax.set_title("💰 Savings Growth Over Time", color='lightgrey')
     ax.set_xticklabels(years,  color='lightgrey')
-    ax.set_xticklabels(savings,  color='lightgrey')
+    ax.set_yticklabels(savings,  color='lightgrey')
     st.pyplot(fig)
 
 # Function to show a live savings counter
@@ -117,7 +117,7 @@ elif page == "Leaderboard":
     ax.set_title("📊 Savings Distribution - Where You Stand", color='lightgrey')
     ax.set_ylabel("Total Savings (₹)", color='lightgrey')
     ax.set_xticklabels(users, rotation=30, color='lightgrey')
-    ax.set_xticklabels(savings,  color='lightgrey')
+    ax.set_yticklabels(savings,  color='lightgrey')
     st.pyplot(fig)
     
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
