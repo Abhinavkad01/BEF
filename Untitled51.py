@@ -96,26 +96,34 @@ elif page == "Savings Tracker":
     months = np.arange(1, 13)
     monthly_savings = np.random.randint(5000, 20000, size=12)  # Fake monthly savings
     fig, ax = plt.subplots(figsize=(5, 3))
-    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
+    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='green')
     ax.set_facecolor("none")
     fig.patch.set_alpha(0)
-    ax.set_xlabel("Month", color='lightgrey')
-    ax.set_ylabel("Savings (₹)", color='lightgrey')
-    ax.set_title("📈 Monthly Savings Over the Year", color='lightgrey')
+    ax.set_xlabel("Month", color='black')
+    ax.set_ylabel("Savings (₹)", color='black')
+    ax.set_title("📈 Monthly Savings Over the Year", color='black')
     st.pyplot(fig)
     
-    # Fake Goals with Progress
-    goals = ["Buy a Car", "Go on a Vacation", "Buy a House", "Retirement Fund"]
-    completed_goals = random.sample(goals, 2)
-    remaining_goals = [goal for goal in goals if goal not in completed_goals]
+    # Fake Goals with Progress and Amounts
+    goals = [
+        {"name": "Buy a Car", "total": 500000, "saved": random.randint(100000, 400000)},
+        {"name": "Go on a Vacation", "total": 200000, "saved": random.randint(50000, 150000)},
+        {"name": "Buy a House", "total": 2000000, "saved": random.randint(500000, 1500000)},
+        {"name": "Retirement Fund", "total": 5000000, "saved": random.randint(1000000, 4000000)}
+    ]
+    
+    completed_goals = [goal for goal in goals if goal["saved"] >= goal["total"]]
+    remaining_goals = [goal for goal in goals if goal["saved"] < goal["total"]]
     
     st.markdown("### ✅ Completed Goals")
     for goal in completed_goals:
-        st.write(f"~~{goal}~~ ✅")
+        st.write(f"~~{goal['name']}~~ ✅ (₹{goal['total']:,})")
     
     st.markdown("### 🎯 Future Goals")
     for goal in remaining_goals:
-        st.write(f"🔜 {goal}")
+        remaining_amount = goal["total"] - goal["saved"]
+        st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,} (Need ₹{remaining_amount:,} more)")
+    
     
     # Earn badges
     if progress > 0.75:
