@@ -99,14 +99,22 @@ elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
     
     # Fake leaderboard
-    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram"]
+    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
     savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
     
-    st.table({"User": users, "Total Savings (₹)": savings})
-    
-    # Peer Comparison
-    user_savings = np.random.randint(50000, 200000)
+    # Identify user's position
+    user_savings = random.randint(50000, 200000)
     rank = sum(user_savings < np.array(savings))
+    
+    # Bar chart visualization
+    fig, ax = plt.subplots()
+    colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
+    ax.bar(users, savings, color=colors)
+    ax.set_title("📊 Savings Distribution - Where You Stand")
+    ax.set_ylabel("Total Savings (₹)")
+    ax.set_xticklabels(users, rotation=30)
+    st.pyplot(fig)
+    
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
 
 # Commitment Contracts Page
