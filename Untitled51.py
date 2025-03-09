@@ -36,10 +36,7 @@ choice = st.sidebar.radio("Navigate", menu)
 
 # Dynamic Live Counter
 def live_counter():
-    st.metric(label="₹500 Cr saved by users", value="Updating...")
-    for i in range(500, 505):
-        time.sleep(1)
-        st.metric(label="₹500 Cr saved by users", value=f"₹{i} Cr")
+    st.metric(label="₹500 Cr saved by users", value="₹500 Cr")
 
 # Home Page
 def home():
@@ -97,6 +94,15 @@ def whatsapp_tips():
             st.sidebar.success("✅ Subscribed! Get ready for weekly financial insights! 💡")
         else:
             st.sidebar.error("⚠️ Please enter a valid number!")
+
+# Placeholder functions for missing pages
+def signup():
+    st.markdown("<div class='hero-text'>🔐 Sign-Up Page Placeholder</div>", unsafe_allow_html=True)
+    st.info("This section will be developed soon.")
+
+def simulator():
+    st.markdown("<div class='hero-text'>🔮 Simulator Page Placeholder</div>", unsafe_allow_html=True)
+    st.info("This section will be developed soon.")
 
 # Main App Logic
 def main():
