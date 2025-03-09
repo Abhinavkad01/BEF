@@ -4,58 +4,64 @@
 # In[2]:
 
 import streamlit as st
+import os
 import matplotlib.pyplot as plt
 import numpy as np
-import time
 
-# Set page title
+# Set Page Config
 st.set_page_config(page_title="Financial Wellness Platform", layout="wide")
 
-# Header
-st.title("Behavioral-Optimized Financial Wellness Platform")
+# Function to load images (fallback to URLs if not found)
+def load_image(filename, url):
+    return filename if os.path.exists(filename) else url
 
-# Dynamic Live Counter (Non-recurring, Just Display Column)
-def format_currency(value):
-    return f"₹{value:,.0f} Cr"
+# Image Paths / URLs
+hdfc_logo = load_image("hdfc_logo.png", "https://upload.wikimedia.org/wikipedia/en/thumb/7/72/HDFC_Bank_logo.svg/1200px-HDFC_Bank_logo.svg.png")
+sbi_logo = load_image("sbi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/4/4e/SBI-logo.svg")
+amfi_logo = load_image("amfi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/a/a8/AMFI_India_logo.png")
 
-st.sidebar.header("Total Savings by Users")
-col1, col2 = st.sidebar.columns([2, 1])
-col1.metric(label="Total Savings", value=format_currency(500))  # Static ₹500 Cr Display
+# Sidebar - Endorsements & Trust Signals
+with st.sidebar:
+    st.image([hdfc_logo, sbi_logo, amfi_logo], width=100)
+    st.markdown("### Recommended by Top Financial Experts")
 
-# Endorsements & Trust Signals
-st.sidebar.header("Trusted by Experts")
-st.sidebar.image(["hdfc_logo.png", "sbi_logo.png", "amfi_logo.png"], width=100)
+# Fake Live Counter - ₹500 Cr saved by users
+st.markdown("## 💰 ₹500 Cr saved by users!")
+st.markdown("*(Scarcity & Bandwagon Effect)*")
 
-# Fake Line Graph for Savings Trend
-years = np.arange(1, 13)
-savings = np.cumsum(np.random.randint(5, 15, size=12))
-
+# Fake Line Graph - Showing Savings Over Time
+st.markdown("### 📊 Savings Growth Over the Year")
 fig, ax = plt.subplots()
-ax.plot(years, savings, marker='o', linestyle='-', color='blue', label="Savings Growth")
-ax.set_title("User Savings Over the Year")
-ax.set_xlabel("Months")
-ax.set_ylabel("Savings (₹ in thousands)")
-ax.legend()
+months = np.arange(1, 13)
+savings = np.cumsum(np.random.randint(5000, 15000, size=12))  # Fake increasing savings data
+ax.plot(months, savings, marker='o', linestyle='-', color='green')
+ax.set_xlabel("Month")
+ax.set_ylabel("Total Savings (₹)")
+ax.set_xticks(months)
+ax.set_title("Savings Trend Over the Year")
 st.pyplot(fig)
 
-# Challenges & Rewards
-st.subheader("Earn Rewards for Smart Financial Decisions")
-st.write("Complete financial challenges and earn badges to stay motivated!")
-st.image("badges_example.png", caption="Your Achievements", use_column_width=True)
+# Commitment Bias - Video Message to Future Self
+st.markdown("## 🎥 Record a Message to Your Future Self")
+st.write("Tell your future self why you’re saving money. Your message will be replayed to keep you motivated.")
+video = st.file_uploader("Upload your video message (MP4, AVI, etc.)", type=["mp4", "avi"])
 
-# Commitment Video Feature
-st.subheader("Commit to Your Future Self")
-st.write("Record a message for your future self as a financial commitment.")
-if st.button("Record Video Message"):
-    st.write("Feature coming soon!")
+# Gamification - Challenges & Rewards
+st.markdown("## 🏆 Challenges & Rewards")
+st.write("Complete smart spending challenges and earn badges for saving efficiently!")
+st.image("https://img.icons8.com/color/96/medal.png", width=80)  # Example badge icon
 
-# Leaderboard & Peer Comparison
-st.subheader("Where Do You Stand?")
-st.write("Your savings are in the **top 20%** of users your age!")
+# Peer Comparison & Leaderboard
+st.markdown("## 📈 Leaderboard - Where Do You Stand?")
+leaderboard_data = {
+    "User": ["You", "Rahul", "Priya", "Amit", "Sneha"],
+    "Savings (₹)": [75000, 80000, 70000, 65000, 62000]
+}
+st.table(leaderboard_data)
 
-# WhatsApp Integration
-st.subheader("Stay Engaged with Weekly WhatsApp Tips")
-st.write("Get weekly savings insights and nudges on WhatsApp to keep you on track.")
+# WhatsApp Integration - Weekly Savings Tips
+st.markdown("## 📩 Get Weekly Tips on WhatsApp!")
+st.write("Stay on track with personalized financial advice directly on WhatsApp.")
 st.button("Subscribe via WhatsApp")
 
-st.success("🚀 Get started today and build a financially secure future!")
+st.success("🔹 This platform is built using behavioral economics principles to maximize user engagement and savings!")
