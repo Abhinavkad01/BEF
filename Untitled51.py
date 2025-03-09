@@ -15,9 +15,13 @@ def set_styles():
     st.markdown(
         """
         <style>
-        body {font-family: 'Arial', sans-serif;}
-        .stButton>button {background-color: #ff8c00; color: white; font-size: 16px; border-radius: 8px; padding: 10px;}
-        .stMetric {text-align: center; font-weight: bold;}
+        body {font-family: 'Arial', sans-serif; background-color: #f8f9fa;}
+        .stButton>button {background: linear-gradient(135deg, #ff8c00, #ff4500); color: white; font-size: 18px; border-radius: 8px; padding: 12px; font-weight: bold; transition: 0.3s;}
+        .stButton>button:hover {transform: scale(1.05);}
+        .hero-text {text-align: center; font-size: 28px; font-weight: bold; margin-bottom: 20px;}
+        .stMetric {text-align: center; font-weight: bold; font-size: 20px;}
+        .cta-container {text-align: center; margin-top: 20px;}
+        .cta-container button {padding: 12px 24px; border-radius: 8px; font-size: 18px;}
         </style>
         """, unsafe_allow_html=True
     )
@@ -29,7 +33,7 @@ menu = ["Home", "Sign-Up", "Dashboard", "Simulator", "Pledge"]
 choice = st.sidebar.selectbox("Navigate", menu)
 
 def home():
-    st.title("💰 Smart Money Management, Simplified")
+    st.markdown("<div class='hero-text'>💰 Transform Your Finances: Next-Level Money Management</div>", unsafe_allow_html=True)
     st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
     st.image("https://source.unsplash.com/1000x400/?finance,money")
     st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
@@ -44,7 +48,7 @@ def home():
             st.experimental_rerun()
 
 def signup():
-    st.title("📩 Sign-Up & Take Control of Your Finances")
+    st.markdown("<div class='hero-text'>📩 Sign-Up & Take Control of Your Finances</div>", unsafe_allow_html=True)
     st.subheader("Join now & get ₹100 Cashback After 3 Months!")
     
     col1, col2 = st.columns(2)
@@ -60,7 +64,7 @@ def signup():
         st.experimental_rerun()
 
 def dashboard():
-    st.title("📊 Your Personalized Savings Dashboard")
+    st.markdown("<div class='hero-text'>📊 Your Personalized Savings Dashboard</div>", unsafe_allow_html=True)
     st.subheader("You're on a **5-day savings streak!** Keep going! 🏆")
     st.progress(60)  # Endowed Progress Effect
     
@@ -73,7 +77,7 @@ def dashboard():
     st.success("**Your savings are in the top 20% of users your age! 🎉**")
 
 def simulator():
-    st.title("🔮 Future Wealth Simulator")
+    st.markdown("<div class='hero-text'>🔮 Future Wealth Simulator</div>", unsafe_allow_html=True)
     amount = st.slider("💸 How much can you save per month?", 1000, 50000, 10000)
     years = st.slider("📅 For how many years?", 1, 20, 5)
     future_savings = amount * years * 12
@@ -82,7 +86,7 @@ def simulator():
     st.image("https://source.unsplash.com/800x300/?success,goal")
 
 def pledge():
-    st.title("✍️ Commitment Pledge")
+    st.markdown("<div class='hero-text'>✍️ Commitment Pledge</div>", unsafe_allow_html=True)
     pledge_text = st.text_area("Write your personal savings pledge")
     
     if st.button("📜 Save Pledge"):
