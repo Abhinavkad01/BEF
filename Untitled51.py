@@ -32,7 +32,7 @@ def plot_savings_graph():
     years = np.arange(2015, 2025, 1)
     savings = np.cumsum(np.random.randint(5, 20, size=len(years))) * 10  # Fake increasing savings
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(5, 3))
     ax.plot(years, savings, color="red", linewidth=2)
     ax.set_facecolor("none")  # Transparent background
     fig.patch.set_alpha(0)  # Transparent figure background
@@ -116,7 +116,7 @@ elif page == "Leaderboard":
     rank = sum(user_savings < np.array(savings))
     
     # Bar chart visualization with transparency and subtle colors
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(5, 3))
     colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
     ax.bar(users, savings, color=colors)
     ax.set_facecolor("none")  # Transparent background
