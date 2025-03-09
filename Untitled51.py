@@ -128,7 +128,7 @@ elif page == "Savings Tracker":
     fig.patch.set_alpha(0)
     ax.set_xlabel("Month", color='black')
     ax.set_ylabel("Savings (₹)", color='black')
-    ax.set_title("📈 Monthly Savings Over the Year", color='black')
+    ax.set_title("Monthly Savings Over the Year", color='black')
     st.pyplot(fig)
 
         # Fake Goals with Progress and Amounts
