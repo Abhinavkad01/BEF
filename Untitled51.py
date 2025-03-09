@@ -7,82 +7,99 @@
 import streamlit as st
 import time
 
-def main():
-    st.set_page_config(page_title="HelloWallet - Financial Wellness", page_icon="💰", layout="wide")
-    
-    # Custom Styling
-    st.markdown("""
+# Set up page configuration
+st.set_page_config(page_title="Financial Wellness Platform", layout="wide")
+
+# Custom Styling
+def set_styles():
+    st.markdown(
+        """
         <style>
-            .main-container {
-                background-color: #f5f7fa;
-            }
-            .title {
-                font-size: 40px;
-                font-weight: bold;
-                color: #2c3e50;
-            }
-            .subtitle {
-                font-size: 24px;
-                color: #34495e;
-            }
-            .cta-button {
-                background-color: #27ae60;
-                color: white;
-                font-size: 18px;
-                font-weight: bold;
-                padding: 12px 20px;
-                border-radius: 8px;
-            }
+        body {font-family: 'Arial', sans-serif;}
+        .stButton>button {background-color: #ff8c00; color: white; font-size: 16px; border-radius: 8px; padding: 10px;}
+        .stMetric {text-align: center; font-weight: bold;}
         </style>
-    """, unsafe_allow_html=True)
-    
-    home()
+        """, unsafe_allow_html=True
+    )
+
+set_styles()
+
+# Navigation menu
+menu = ["Home", "Sign-Up", "Dashboard", "Simulator", "Pledge"]
+choice = st.sidebar.selectbox("Navigate", menu)
 
 def home():
-    st.markdown("<div class='main-container'>", unsafe_allow_html=True)
-    st.markdown("<h1 class='title'>Take Control of Your Financial Future</h1>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>Join over <b>500,000+</b> Indians already saving smarter with HelloWallet!</p>", unsafe_allow_html=True)
-    
-    st.image("https://source.unsplash.com/1200x400/?finance,money", use_column_width=True)
+    st.title("💰 Smart Money Management, Simplified")
+    st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
+    st.image("https://source.unsplash.com/1000x400/?finance,money")
+    st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
     
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("### Why Choose HelloWallet?")
-        st.write("✅ Save money effortlessly with AI-driven budgeting")
-        st.write("✅ Get free financial health reports")
-        st.write("✅ Reduce hidden expenses & optimize savings")
-        st.write("✅ Trusted by top financial experts & influencers")
-        
+        st.info("📈 **₹15,000/year lost due to poor spending habits**")
     with col2:
-        st.markdown("### Exclusive Offer!")
-        st.success("Get ₹2,000 worth of smart budgeting tools for FREE! 🎉")
-        st.button("Claim Your Free Trial", key="signup_button")
-        
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    if st.button("Get Started Now!"):
-        sign_up()
+        if st.button("🚀 Start Tracking in 30 Seconds - No Bank Details Needed"):
+            st.success("Redirecting to Sign-Up...")
+            time.sleep(1)
+            st.experimental_rerun()
 
-def sign_up():
-    st.markdown("### Sign Up in 30 Seconds")
-    phone = st.text_input("Enter Your Phone Number for OTP Verification")
-    if phone:
-        with st.spinner("Sending OTP..."):
-            time.sleep(2)
-        otp = st.text_input("Enter OTP Sent to Your Phone", type="password")
-        if otp:
-            with st.spinner("Verifying..."):
-                time.sleep(2)
-            st.success("You're all set! Your savings journey starts now! 🎯")
+def signup():
+    st.title("📩 Sign-Up & Take Control of Your Finances")
+    st.subheader("Join now & get ₹100 Cashback After 3 Months!")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        name = st.text_input("👤 Name")
+        email = st.text_input("✉️ Email")
+    with col2:
+        income = st.number_input("💵 Monthly Income (₹)", min_value=1000, step=500)
+    
+    if st.button("Join & Start Saving Now!"):
+        st.success(f"Welcome {name}! Redirecting to Dashboard...")
+        time.sleep(1)
+        st.experimental_rerun()
 
 def dashboard():
-    st.title("Your Financial Dashboard")
-    st.write("Track your savings, set goals, and grow your wealth.")
-    st.metric(label="Total Savings", value="₹50,000", delta="+₹5,000 this month")
-    st.progress(70)
+    st.title("📊 Your Personalized Savings Dashboard")
+    st.subheader("You're on a **5-day savings streak!** Keep going! 🏆")
+    st.progress(60)  # Endowed Progress Effect
     
-    st.button("Optimize My Expenses")
-    st.button("View My Financial Health Report")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("💰 Total Savings", "₹25,000", "+₹1,500 this month")
+    with col2:
+        st.metric("📉 Unnecessary Expenses Cut", "₹8,000", "-₹500 this week")
     
+    st.success("**Your savings are in the top 20% of users your age! 🎉**")
+
+def simulator():
+    st.title("🔮 Future Wealth Simulator")
+    amount = st.slider("💸 How much can you save per month?", 1000, 50000, 10000)
+    years = st.slider("📅 For how many years?", 1, 20, 5)
+    future_savings = amount * years * 12
+    
+    st.success(f"If you save ₹{amount}/month, you'll have **₹{future_savings}** in {years} years! 💰")
+    st.image("https://source.unsplash.com/800x300/?success,goal")
+
+def pledge():
+    st.title("✍️ Commitment Pledge")
+    pledge_text = st.text_area("Write your personal savings pledge")
+    
+    if st.button("📜 Save Pledge"):
+        st.success("✅ Pledge Saved! Stay committed to your goals!")
+        time.sleep(1)
+
+def main():
+    if choice == "Home":
+        home()
+    elif choice == "Sign-Up":
+        signup()
+    elif choice == "Dashboard":
+        dashboard()
+    elif choice == "Simulator":
+        simulator()
+    elif choice == "Pledge":
+        pledge()
+
 if __name__ == "__main__":
     main()
