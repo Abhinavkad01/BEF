@@ -32,11 +32,11 @@ def plot_savings_graph():
     years = np.arange(2015, 2025, 1)
     savings = np.cumsum(np.random.randint(5, 20, size=len(years))) * 10  # Fake increasing savings
 
-    fig, ax = plt.subplots(figsize=(5, 3))
+    fig, ax = plt.subplots(figsize=(2, 3))
     ax.plot(years, savings, color="red", linewidth=2)
     ax.set_facecolor("none")  # Transparent background
     fig.patch.set_alpha(0)  # Transparent figure background
-    ax.set_xlabel("Year", color='lightgrey')
+    ax.set_xlabel("Year", color='black')
     ax.set_ylabel("Total Savings (in Lakhs)", color='black')
     ax.set_title(" Savings Growth Over Time", color='black')
     ax.set_xticklabels(years,  color='black')
