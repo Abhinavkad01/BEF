@@ -8,6 +8,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+import random
 
 # Set page config
 st.set_page_config(page_title="Smart Savings", page_icon="💰", layout="wide")
@@ -24,7 +25,7 @@ else:
     st.sidebar.warning("Some logos are missing. Please check file paths.")
 
 # Navigation
-page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard"])
+page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard", "Commitment Contracts"]) 
 
 # Function to create a fake savings graph
 def plot_savings_graph():
@@ -54,14 +55,14 @@ def live_savings_counter():
 if page == "Home":
     st.title("🚀 Smart Savings - Achieve Your Financial Goals")
     st.markdown("### Make smart spending decisions and build wealth with science-backed strategies.")
-
+    
     # Live Savings Counter
     live_savings_counter()
-
+    
     # Show savings graph
     st.markdown("### 📊 How People Are Saving Over Time")
     plot_savings_graph()
-
+    
     # Fake Reviews
     st.markdown("### ⭐ Customer Reviews")
     reviews = [
@@ -81,13 +82,13 @@ elif page == "Savings Tracker":
     # Savings Goal Input
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000)
     st.success(f"Your goal: ₹{savings_goal:,}")
-
+    
     # Progress Bar
     saved_amount = np.random.randint(0, savings_goal)
     progress = saved_amount / savings_goal
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
-
+    
     # Earn badges
     if progress > 0.75:
         st.balloons()
@@ -102,11 +103,25 @@ elif page == "Leaderboard":
     savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
     
     st.table({"User": users, "Total Savings (₹)": savings})
-
+    
     # Peer Comparison
     user_savings = np.random.randint(50000, 200000)
     rank = sum(user_savings < np.array(savings))
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
+
+# Commitment Contracts Page
+elif page == "Commitment Contracts":
+    st.title("📜 Financial Commitment Contracts")
+    st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
+    
+    goal = st.text_input("🎯 What is your savings goal?")
+    amount = st.number_input("💰 Amount to commit (₹)", min_value=1000, step=1000)
+    anti_charity = st.selectbox("💀 Choose an anti-charity (where money goes if you fail)",
+                               ["Random Opponent", "Political Party You Dislike", "Competitor Bank"])
+    referee = st.text_input("👀 Name of your referee (someone to verify progress)")
+    
+    if st.button("Create Commitment Contract"):
+        st.success(f"✅ Commitment Contract Created! If you fail, ₹{amount:,} will be sent to {anti_charity}.")
 
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
