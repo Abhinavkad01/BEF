@@ -3,7 +3,6 @@
 
 # In[2]:
 
-
 import streamlit as st
 import time
 
@@ -34,17 +33,12 @@ set_styles()
 menu = ["🏠 Home", "🔐 Sign-Up", "📊 Dashboard", "🔮 Simulator", "✍️ Pledge"]
 choice = st.sidebar.radio("Navigate", menu)
 
-# Dynamic Live Counter
-def live_counter():
-    st.metric(label="₹500 Cr saved by users", value="₹500 Cr")
-
 # Home Page
 def home():
     st.markdown("<div class='hero-text'>💰 Transform Your Finances: Next-Level Money Management</div>", unsafe_allow_html=True)
     st.image("https://source.unsplash.com/1000x400/?finance,money", use_container_width=True)
     
     st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
-    live_counter()
     st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
     
     st.markdown("### ✅ Recommended by top financial experts")
@@ -59,7 +53,32 @@ def home():
             time.sleep(1)
             st.experimental_rerun()
 
-# Pledge Page with Pre-commitment Bias
+# Sign-Up Page
+def signup():
+    st.markdown("<div class='hero-text'>🔐 Create Your Account</div>", unsafe_allow_html=True)
+    email = st.text_input("📧 Email Address")
+    password = st.text_input("🔒 Password", type="password")
+    if st.button("Sign Up"):
+        if email and password:
+            st.success("✅ Registration Successful! Redirecting to Dashboard...")
+            time.sleep(1)
+            st.experimental_rerun()
+        else:
+            st.error("⚠️ Please enter valid details.")
+
+# Simulator Page
+def simulator():
+    st.markdown("<div class='hero-text'>🔮 Financial Planning Simulator</div>", unsafe_allow_html=True)
+    income = st.number_input("💰 Monthly Income (₹)", min_value=1000, value=50000, step=500)
+    expenses = st.number_input("📉 Monthly Expenses (₹)", min_value=0, value=20000, step=500)
+    savings = income - expenses
+    st.metric(label="💾 Estimated Monthly Savings", value=f"₹{savings}")
+    if savings < 0:
+        st.warning("⚠️ Your expenses exceed your income. Consider reducing unnecessary spending!")
+    else:
+        st.success("🎯 You're on track! Keep optimizing your savings.")
+
+# Pledge Page
 def pledge():
     st.markdown("<div class='hero-text'>✍️ Commitment Pledge</div>", unsafe_allow_html=True)
     st.subheader("Record a video message for your future self!")
@@ -94,15 +113,6 @@ def whatsapp_tips():
             st.sidebar.success("✅ Subscribed! Get ready for weekly financial insights! 💡")
         else:
             st.sidebar.error("⚠️ Please enter a valid number!")
-
-# Placeholder functions for missing pages
-def signup():
-    st.markdown("<div class='hero-text'>🔐 Sign-Up Page Placeholder</div>", unsafe_allow_html=True)
-    st.info("This section will be developed soon.")
-
-def simulator():
-    st.markdown("<div class='hero-text'>🔮 Simulator Page Placeholder</div>", unsafe_allow_html=True)
-    st.info("This section will be developed soon.")
 
 # Main App Logic
 def main():
