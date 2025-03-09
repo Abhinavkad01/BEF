@@ -130,8 +130,22 @@ elif page == "Leaderboard":
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
     
     # Public Accountability
-    if st.button("Share My Progress on LinkedIn! 🎯"):
+    if st.button("Share My Progress on Social Media! 🎯"):
         st.success("✅ Your savings progress has been shared successfully!")
+    # Commitment Contracts Page
+elif page == "Commitment Contracts":
+    st.title("📜 Financial Commitment Contracts")
+    st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
+    
+    goal = st.text_input("🎯 What is your savings goal?")
+    amount = st.number_input("💰 Amount to commit (₹)", min_value=1000, step=1000)
+    anti_charity = st.selectbox("💀 Choose an anti-charity (where money goes if you fail)",
+                               ["Random Opponent", "Political Party You Dislike", "Competitor Bank"])
+    referee = st.text_input("👀 Name of your referee (someone to verify progress)")
+    
+    if st.button("Create Commitment Contract"):
+        st.success(f"✅ Commitment Contract Created! If you fail, ₹{amount:,} will be sent to {anti_charity}.")
+
 
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
