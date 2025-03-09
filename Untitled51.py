@@ -6,6 +6,7 @@
 
 import streamlit as st
 import time
+import random
 
 # Page Configurations
 st.set_page_config(page_title="Financial Wellness Platform", layout="wide", page_icon="💰")
@@ -20,10 +21,8 @@ def set_styles():
                           border-radius: 8px; padding: 12px; font-weight: bold; transition: 0.3s; width: 100%;}
         .stButton>button:hover {transform: scale(1.05); cursor: pointer;}
         .hero-text {text-align: center; font-size: 30px; font-weight: bold; margin-bottom: 20px; color: #333;}
-        .stMetric {text-align: center; font-weight: bold; font-size: 20px;}
-        .cta-container {text-align: center; margin-top: 20px;}
-        .cta-container button {padding: 12px 24px; border-radius: 8px; font-size: 18px;}
         .metric-box {background: white; padding: 15px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);}
+        .progress-text {text-align: center; font-size: 18px; font-weight: bold; color: #0077b6;}
         </style>
         """, unsafe_allow_html=True
     )
@@ -35,31 +34,38 @@ menu = ["🏠 Home", "🔐 Sign-Up", "📊 Dashboard", "🔮 Simulator", "✍️
 choice = st.sidebar.radio("Navigate", menu)
 
 def home():
-    st.markdown("<div class='hero-text'>💰 Transform Your Finances: Next-Level Money Management</div>", unsafe_allow_html=True)
+    st.markdown("<div class='hero-text'>💰 Join 32,567 Smart Savers – Are You Next?</div>", unsafe_allow_html=True)
     st.image("https://source.unsplash.com/1000x400/?finance,money", use_column_width=True)
     
     st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
-    st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
+    st.success("**Every month, you're losing ₹15,000 to impulse spending. Start saving now!**")
+    
+    if st.button("🚀 Start Tracking – No Bank Details Needed"):
+        st.success("Redirecting to Sign-Up...")
+        time.sleep(1)
+        st.experimental_rerun()
+
+def signup():
+    st.markdown("<div class='hero-text'>📩 Join & Take Control of Your Finances</div>", unsafe_allow_html=True)
+    st.subheader("🎁 Get ₹100 Cashback After 3 Months of Saving!")
     
     col1, col2 = st.columns(2)
     with col1:
-        st.info("📉 **₹15,000/year lost due to poor spending habits**")
+        name = st.text_input("👤 Name")
+        email = st.text_input("✉️ Email")
     with col2:
-        if st.button("🚀 Start Tracking - No Bank Details Needed"):
-            st.success("Redirecting to Sign-Up...")
-            time.sleep(1)
-            st.experimental_rerun()
-
-def signup():
-    st.markdown("<div class='hero-text'>📩 Sign-Up & Take Control of Your Finances</div>", unsafe_allow_html=True)
-    st.subheader("🎁 Join now & get ₹100 Cashback After 3 Months!")
-
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("👤 Name", help="Enter your full name")
-        email = st.text_input("✉️ Email", help="Enter a valid email address")
-    with col2:
-        income = st.number_input("💵 Monthly Income (₹)", min_value=1000, step=500, help="Your estimated monthly income")
+        income = st.number_input("💵 Monthly Income (₹)", min_value=1000, step=500)
+    
+    progress = 0
+    if name:
+        progress += 40
+    if email:
+        progress += 40
+    if income > 1000:
+        progress += 20
+    
+    st.progress(progress)
+    st.markdown(f"<p class='progress-text'>{progress}% Completed!</p>", unsafe_allow_html=True)
     
     if st.button("✅ Join & Start Saving!"):
         if name and email:
@@ -71,17 +77,16 @@ def signup():
 
 def dashboard():
     st.markdown("<div class='hero-text'>📊 Your Personalized Savings Dashboard</div>", unsafe_allow_html=True)
-    st.subheader("🔥 You're on a **5-day savings streak!** Keep going! 🏆")
+    streak = random.randint(1, 30)
+    st.subheader(f"🔥 You’re on a **{streak}-day savings streak!** Keep going! 🏆")
     
-    st.progress(60)  # Endowed Progress Effect
+    st.progress(min(streak * 3, 100))  # Endowed Progress Effect
     
     col1, col2 = st.columns(2)
     with col1:
-        with st.container():
-            st.markdown('<div class="metric-box">💰 **Total Savings:** ₹25,000 <br> 📈 +₹1,500 this month</div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-box">💰 **Total Savings:** ₹25,000 <br> 📈 +₹1,500 this month</div>', unsafe_allow_html=True)
     with col2:
-        with st.container():
-            st.markdown('<div class="metric-box">📉 **Unnecessary Expenses Cut:** ₹8,000 <br> 🔽 -₹500 this week</div>', unsafe_allow_html=True)
+        st.markdown('<div class="metric-box">📉 **Missed Savings:** ₹8,000 <br> 😟 You could have saved ₹500 more this week!</div>', unsafe_allow_html=True)
     
     st.success("**Your savings are in the top 20% of users your age! 🎉**")
 
@@ -92,22 +97,22 @@ def simulator():
     years = st.slider("📅 Investment Duration (Years)", 1, 20, 5)
     expected_return = st.slider("📈 Expected Annual Return (%)", 4, 15, 8)
     
-    # Future Savings Calculation
     future_savings = amount * ((1 + expected_return / 100) ** years - 1) / (expected_return / 100) * 12
     
-    st.success(f"🎯 If you save ₹{amount}/month, you'll have **₹{round(future_savings, 2)}** in {years} years! 💰")
+    goal_items = ["🏝️ Trip to Bali", "📱 Latest iPhone", "🚗 Dream Car", "🏡 Home Down Payment"]
+    goal = random.choice(goal_items)
+    
+    st.success(f"🎯 If you save ₹{amount}/month, you'll have **₹{round(future_savings, 2)}** in {years} years – enough for a **{goal}!** 💰")
     st.image("https://source.unsplash.com/800x300/?success,goal", use_column_width=True)
 
 def pledge():
-    st.markdown("<div class='hero-text'>✍️ Commitment Pledge</div>", unsafe_allow_html=True)
+    st.markdown("<div class='hero-text'>✍️ Your Savings Commitment</div>", unsafe_allow_html=True)
     
-    pledge_text = st.text_area("Write your personal savings pledge (e.g., I will save 20% of my income)")
+    goal_options = ["Save ₹5,000 every month", "Invest 20% of salary", "Cut down online shopping"]
+    pledge_text = st.selectbox("Choose a Savings Pledge", goal_options)
     
     if st.button("📜 Save Pledge"):
-        if pledge_text:
-            st.success("✅ Pledge Saved! Stay committed to your goals! 🎯")
-        else:
-            st.warning("⚠️ Please enter your pledge before saving!")
+        st.success("✅ Pledge Saved! Stay committed to your goals! 🎯")
 
 # Main App Logic
 def main():
