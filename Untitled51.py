@@ -34,12 +34,24 @@ set_styles()
 menu = ["🏠 Home", "🔐 Sign-Up", "📊 Dashboard", "🔮 Simulator", "✍️ Pledge"]
 choice = st.sidebar.radio("Navigate", menu)
 
+# Dynamic Live Counter
+def live_counter():
+    st.metric(label="₹500 Cr saved by users", value="Updating...")
+    for i in range(500, 505):
+        time.sleep(1)
+        st.metric(label="₹500 Cr saved by users", value=f"₹{i} Cr")
+
+# Home Page
 def home():
     st.markdown("<div class='hero-text'>💰 Transform Your Finances: Next-Level Money Management</div>", unsafe_allow_html=True)
     st.image("https://source.unsplash.com/1000x400/?finance,money", use_container_width=True)
     
     st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
+    live_counter()
     st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
+    
+    st.markdown("### ✅ Recommended by top financial experts")
+    st.image("https://source.unsplash.com/600x200/?bank,finance", use_container_width=True)
     
     col1, col2 = st.columns(2)
     with col1:
@@ -50,25 +62,16 @@ def home():
             time.sleep(1)
             st.experimental_rerun()
 
-def signup():
-    st.markdown("<div class='hero-text'>📩 Sign-Up & Take Control of Your Finances</div>", unsafe_allow_html=True)
-    st.subheader("🎁 Join now & get ₹100 Cashback After 3 Months!")
-
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("👤 Name", help="Enter your full name")
-        email = st.text_input("✉️ Email", help="Enter a valid email address")
-    with col2:
-        income = st.number_input("💵 Monthly Income (₹)", min_value=1000, step=500, help="Your estimated monthly income")
+# Pledge Page with Pre-commitment Bias
+def pledge():
+    st.markdown("<div class='hero-text'>✍️ Commitment Pledge</div>", unsafe_allow_html=True)
+    st.subheader("Record a video message for your future self!")
+    st.text_area("Hey, future me! Stick to this plan!")
     
-    if st.button("✅ Join & Start Saving!"):
-        if name and email:
-            st.success(f"🎉 Welcome, {name}! Redirecting to Dashboard...")
-            time.sleep(1)
-            st.experimental_rerun()
-        else:
-            st.error("⚠️ Please fill out all fields!")
+    if st.button("📜 Save Video Message"):
+        st.success("✅ Your message is saved! We will remind you periodically! 🎯")
 
+# Dashboard with Leaderboard
 def dashboard():
     st.markdown("<div class='hero-text'>📊 Your Personalized Savings Dashboard</div>", unsafe_allow_html=True)
     st.subheader("🔥 You're on a **5-day savings streak!** Keep going! 🏆")
@@ -85,32 +88,19 @@ def dashboard():
     
     st.success("**Your savings are in the top 20% of users your age! 🎉**")
 
-def simulator():
-    st.markdown("<div class='hero-text'>🔮 Future Wealth Simulator</div>", unsafe_allow_html=True)
-    
-    amount = st.slider("💸 Monthly Savings (₹)", 1000, 50000, 10000)
-    years = st.slider("📅 Investment Duration (Years)", 1, 20, 5)
-    expected_return = st.slider("📈 Expected Annual Return (%)", 4, 15, 8)
-    
-    # Future Savings Calculation
-    future_savings = amount * ((1 + expected_return / 100) ** years - 1) / (expected_return / 100) * 12
-    
-    st.success(f"🎯 If you save ₹{amount}/month, you'll have **₹{round(future_savings, 2)}** in {years} years! 💰")
-    st.image("https://source.unsplash.com/800x300/?success,goal", use_container_width=True)
-
-def pledge():
-    st.markdown("<div class='hero-text'>✍️ Commitment Pledge</div>", unsafe_allow_html=True)
-    
-    pledge_text = st.text_area("Write your personal savings pledge (e.g., I will save 20% of my income)")
-    
-    if st.button("📜 Save Pledge"):
-        if pledge_text:
-            st.success("✅ Pledge Saved! Stay committed to your goals! 🎯")
+# WhatsApp Integration
+def whatsapp_tips():
+    st.sidebar.markdown("📩 **Receive Weekly Savings Tips via WhatsApp!**")
+    phone = st.sidebar.text_input("Enter Your WhatsApp Number")
+    if st.sidebar.button("Subscribe"):
+        if phone:
+            st.sidebar.success("✅ Subscribed! Get ready for weekly financial insights! 💡")
         else:
-            st.warning("⚠️ Please enter your pledge before saving!")
+            st.sidebar.error("⚠️ Please enter a valid number!")
 
 # Main App Logic
 def main():
+    whatsapp_tips()
     if choice == "🏠 Home":
         home()
     elif choice == "🔐 Sign-Up":
