@@ -22,10 +22,9 @@ def home_page():
     st.markdown("### ⭐⭐⭐⭐⭐ 'Best savings tool I've ever used!' - Priya S.")
     
     # Endorsements
-    hdfc_logo = load_image("hdfc_logo.png", "https://upload.wikimedia.org/wikipedia/en/thumb/7/72/HDFC_Bank_logo.svg/1200px-HDFC_Bank_logo.svg.png")
-    sbi_logo = load_image("sbi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/4/4e/SBI-logo.svg")
-    amfi_logo = load_image("amfi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/a/a8/AMFI_India_logo.png")
-    st.image([hdfc_logo, sbi_logo, amfi_logo], width=150)
+    hdfc_logo = load_image("hdfc_logo.png", "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.stickpng.com%2Fimg%2Ficons-logos-emojis%2Fbank-logos%2Fhdfc-logo-thumbnail&psig=AOvVaw35aq86NLTgVcOXY5dGcILj&ust=1741634982773000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNDfn4be_YsDFQAAAAAdAAAAABAE")
+    sbi_logo = load_image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F176344141640768
+    st.image([hdfc_logo, sbi_logo], width=150)
     
     # Peer Comparison
     st.markdown("### Your savings are in the **top 10%** of people your age!")
