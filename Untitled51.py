@@ -92,11 +92,35 @@ elif page == "Savings Tracker":
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
     st.warning(f"⚠️ If you don’t save ₹{savings_goal - saved_amount:,}, you could miss out on future gains!")
     
+    # Fake Monthly Savings Graph
+    months = np.arange(1, 13)
+    monthly_savings = np.random.randint(5000, 20000, size=12)  # Fake monthly savings
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
+    ax.set_facecolor("none")
+    fig.patch.set_alpha(0)
+    ax.set_xlabel("Month", color='lightgrey')
+    ax.set_ylabel("Savings (₹)", color='lightgrey')
+    ax.set_title("📈 Monthly Savings Over the Year", color='lightgrey')
+    st.pyplot(fig)
+    
+    # Fake Goals with Progress
+    goals = ["Buy a Car", "Go on a Vacation", "Buy a House", "Retirement Fund"]
+    completed_goals = random.sample(goals, 2)
+    remaining_goals = [goal for goal in goals if goal not in completed_goals]
+    
+    st.markdown("### ✅ Completed Goals")
+    for goal in completed_goals:
+        st.write(f"~~{goal}~~ ✅")
+    
+    st.markdown("### 🎯 Future Goals")
+    for goal in remaining_goals:
+        st.write(f"🔜 {goal}")
+    
     # Earn badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
-    
     # Temptation Bundling - Pairing Finance Tips with News
     if st.button("Get a Quick Finance Tip & News Update!"):
         tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
