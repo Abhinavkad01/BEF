@@ -39,8 +39,6 @@ def plot_savings_graph():
     ax.set_xlabel("Year", color='lightgrey')
     ax.set_ylabel("Total Savings (in Lakhs)", color='lightgrey')
     ax.set_title("💰 Savings Growth Over Time", color='lightgrey')
-    ax.set_xticklabels(years,  color='lightgrey')
-    ax.set_yticklabels(savings,  color='lightgrey')
     st.pyplot(fig)
 
 # Function to show a live savings counter
@@ -81,20 +79,27 @@ if page == "Home":
 elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
     
-    # Savings Goal Input
+    # Savings Goal Input with Escalation
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000)
     st.success(f"Your goal: ₹{savings_goal:,}")
     
-    # Progress Bar
+    # Progress Bar with Loss Framing
     saved_amount = np.random.randint(0, savings_goal)
     progress = saved_amount / savings_goal
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
+    st.warning(f"⚠️ If you don’t save ₹{savings_goal - saved_amount:,}, you could miss out on future gains!")
     
     # Earn badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
+    
+    # Temptation Bundling - Pairing Finance Tips with News
+    if st.button("Get a Quick Finance Tip & News Update!"):
+        tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
+        news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
+        st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
 # Leaderboard Page
 elif page == "Leaderboard":
@@ -116,25 +121,13 @@ elif page == "Leaderboard":
     fig.patch.set_alpha(0)  # Transparent figure background
     ax.set_title("📊 Savings Distribution - Where You Stand", color='lightgrey')
     ax.set_ylabel("Total Savings (₹)", color='lightgrey')
-    ax.set_xticklabels(users, rotation=30, color='lightgrey')
-    ax.set_yticklabels(savings,  color='lightgrey')
     st.pyplot(fig)
     
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
-
-# Commitment Contracts Page
-elif page == "Commitment Contracts":
-    st.title("📜 Financial Commitment Contracts")
-    st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
     
-    goal = st.text_input("🎯 What is your savings goal?")
-    amount = st.number_input("💰 Amount to commit (₹)", min_value=1000, step=1000)
-    anti_charity = st.selectbox("💀 Choose an anti-charity (where money goes if you fail)",
-                               ["Random Opponent", "Political Party You Dislike", "Competitor Bank"])
-    referee = st.text_input("👀 Name of your referee (someone to verify progress)")
-    
-    if st.button("Create Commitment Contract"):
-        st.success(f"✅ Commitment Contract Created! If you fail, ₹{amount:,} will be sent to {anti_charity}.")
+    # Public Accountability
+    if st.button("Share My Progress on LinkedIn! 🎯"):
+        st.success("✅ Your savings progress has been shared successfully!")
 
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
