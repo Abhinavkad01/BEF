@@ -23,7 +23,7 @@ def home_page():
     
     # Endorsements
     hdfc_logo = load_image("hdfc_logo.png", "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.stickpng.com%2Fimg%2Ficons-logos-emojis%2Fbank-logos%2Fhdfc-logo-thumbnail&psig=AOvVaw35aq86NLTgVcOXY5dGcILj&ust=1741634982773000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNDfn4be_YsDFQAAAAAdAAAAABAE")
-    sbi_logo = load_image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F176344141640768
+    sbi_logo = load_image("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F176344141640768"
     st.image([hdfc_logo, sbi_logo], width=150)
     
     # Peer Comparison
