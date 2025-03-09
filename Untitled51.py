@@ -36,12 +36,10 @@ choice = st.sidebar.radio("Navigate", menu)
 
 # Dynamic Live Counter
 def live_counter():
-    counter_placeholder = st.empty()
-    count = 500
-    while True:
-        counter_placeholder.metric(label="₹500 Cr saved by users", value=f"₹{count} Cr")
-        count += 1
-        time.sleep(30)
+    st.metric(label="₹500 Cr saved by users", value="Updating...")
+    for i in range(500, 505):
+        time.sleep(1)
+        st.metric(label="₹500 Cr saved by users", value=f"₹{i} Cr")
 
 # Home Page
 def home():
@@ -49,7 +47,6 @@ def home():
     st.image("https://source.unsplash.com/1000x400/?finance,money", use_container_width=True)
     
     st.markdown("### 🌟 Over ₹500 Cr Saved by Our Users")
-    st.empty()
     live_counter()
     st.success("**Avoid impulse spending & grow your wealth effortlessly.**")
     
@@ -100,13 +97,6 @@ def whatsapp_tips():
             st.sidebar.success("✅ Subscribed! Get ready for weekly financial insights! 💡")
         else:
             st.sidebar.error("⚠️ Please enter a valid number!")
-
-# Dummy Functions to Avoid NameError
-def signup():
-    st.write("Sign-Up Page Placeholder")
-
-def simulator():
-    st.write("Simulator Page Placeholder")
 
 # Main App Logic
 def main():
