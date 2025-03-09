@@ -36,9 +36,9 @@ def plot_savings_graph():
     ax.plot(years, savings, color="red", linewidth=2)
     ax.set_facecolor("none")  # Transparent background
     fig.patch.set_alpha(0)  # Transparent figure background
-    ax.set_xlabel("Year")
-    ax.set_ylabel("Total Savings (in Lakhs)")
-    ax.set_title("💰 Savings Growth Over Time")
+    ax.set_xlabel("Year", color='lightgrey')
+    ax.set_ylabel("Total Savings (in Lakhs)", color='lightgrey')
+    ax.set_title("💰 Savings Growth Over Time", color='lightgrey')
     st.pyplot(fig)
 
 # Function to show a live savings counter
@@ -106,13 +106,15 @@ elif page == "Leaderboard":
     user_savings = random.randint(50000, 200000)
     rank = sum(user_savings < np.array(savings))
     
-    # Bar chart visualization
+    # Bar chart visualization with transparency and subtle colors
     fig, ax = plt.subplots()
     colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
     ax.bar(users, savings, color=colors)
-    ax.set_title("📊 Savings Distribution - Where You Stand")
-    ax.set_ylabel("Total Savings (₹)")
-    ax.set_xticklabels(users, rotation=30)
+    ax.set_facecolor("none")  # Transparent background
+    fig.patch.set_alpha(0)  # Transparent figure background
+    ax.set_title("📊 Savings Distribution - Where You Stand", color='lightgrey')
+    ax.set_ylabel("Total Savings (₹)", color='lightgrey')
+    ax.set_xticklabels(users, rotation=30, color='lightgrey')
     st.pyplot(fig)
     
     st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
