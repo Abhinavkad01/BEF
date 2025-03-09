@@ -25,7 +25,7 @@ else:
     st.sidebar.warning("Some logos are missing. Please check file paths.")
 
 # Navigation
-page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard", "Commitment Contracts"]) 
+page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard", "Commitment Contracts","Financial Tips"]) 
 
 # Function to create a fake savings graph
 def plot_savings_graph():
@@ -145,7 +145,19 @@ elif page == "Commitment Contracts":
     
     if st.button("Create Commitment Contract"):
         st.success(f"✅ Commitment Contract Created! If you fail, ₹{amount:,} will be sent to {anti_charity}.")
-
+    # Financial Tips Page
+elif page == "Financial Tips":
+    st.title("💡 Smart Financial Tips")
+    tips = [
+        "🚗 Want to buy a car? You need to save ₹10,000 per month for 3 years!",
+        "🏠 Planning to buy a house? Start investing 20% of your salary today!",
+        "🎓 Student loan? Pay off high-interest debt first to save money in the long run!",
+        "✈️ Dreaming of a vacation? Set up an automated travel fund and save ₹5000 every month!",
+        "📈 Want to retire early? Increase your monthly investments by just 5% every year!"
+    ]
+    st.write(random.choice(tips))
+    if st.button("Get Another Tip"):
+        st.write(random.choice(tips))
 
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
