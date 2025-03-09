@@ -118,6 +118,61 @@ elif page == "Savings Tracker":
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
+    # Leaderboard Page
+elif page == "Leaderboard":
+    st.title("🏆 Savings Leaderboard")
+    
+    # Fake leaderboard
+    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
+    savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
+    
+    # Identify user's position
+    user_savings = random.randint(50000, 200000)
+    rank = sum(user_savings < np.array(savings))
+    
+    # Bar chart visualization with transparency and subtle colors
+    fig, ax = plt.subplots(figsize=(5, 3))
+    colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
+    ax.bar(users, savings, color=colors)
+    ax.set_facecolor("none")  # Transparent background
+    fig.patch.set_alpha(0)  # Transparent figure background
+    ax.set_title(" Savings Distribution - Where You Stand", color='black')
+    ax.set_ylabel("Total Savings (₹)", color='black')
+    ax.set_xticklabels(users, rotation=30, color='black')
+    ax.set_yticklabels(savings,  color='black')
+    st.pyplot(fig)
+    
+    st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
+    
+    # Public Accountability
+    if st.button("Share My Progress on Social Media! 🎯"):
+        st.success("✅ Your savings progress has been shared successfully!")
+    # Commitment Contracts Page
+elif page == "Commitment Contracts":
+    st.title("📜 Financial Commitment Contracts")
+    st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
+    
+    goal = st.text_input("🎯 What is your savings goal?")
+    amount = st.number_input("💰 Amount to commit (₹)", min_value=1000, step=1000)
+    anti_charity = st.selectbox("💀 Choose an anti-charity (where money goes if you fail)",
+                               ["Random Opponent", "Political Party You Dislike", "Competitor Bank"])
+    referee = st.text_input("👀 Name of your referee (someone to verify progress)")
+    
+    if st.button("Create Commitment Contract"):
+        st.success(f"✅ Commitment Contract Created! If you fail, ₹{amount:,} will be sent to {anti_charity}.")
+    # Financial Tips Page
+elif page == "Financial Tips":
+    st.title("💡 Smart Financial Tips")
+    tips = [
+        "🚗 Want to buy a car? You need to save ₹10,000 per month for 3 years!",
+        "🏠 Planning to buy a house? Start investing 20% of your salary today!",
+        "🎓 Student loan? Pay off high-interest debt first to save money in the long run!",
+        "✈️ Dreaming of a vacation? Set up an automated travel fund and save ₹5000 every month!",
+        "📈 Want to retire early? Increase your monthly investments by just 5% every year!"
+    ]
+    st.write(random.choice(tips))
+    if st.button("Get Another Tip"):
+        st.write(random.choice(tips))
 
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
@@ -125,3 +180,5 @@ st.sidebar.write("Receive weekly savings tips on WhatsApp.")
 phone = st.sidebar.text_input("📱 Enter your number")
 if phone:
     st.sidebar.success("✅ You'll receive tips on WhatsApp!")
+
+
