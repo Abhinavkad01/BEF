@@ -79,7 +79,7 @@ if page == "Home":
 
 # Savings Tracker Page
 elif page == "Savings Tracker":
-    st.title("📈 Track Your Savings")
+    st.title("Track Your Savings")
     
     # Savings Goal Input with Escalation
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000)
