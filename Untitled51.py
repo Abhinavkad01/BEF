@@ -41,7 +41,7 @@ def home():
         if st.button("🚀 Start Tracking in 30 Seconds - No Bank Details Needed"):
             st.success("Redirecting to Sign-Up...")
             time.sleep(1)
-            st.experimental_rerun()
+            st.rerun()
 
 def signup():
     st.title("📩 Sign-Up & Take Control of Your Finances")
@@ -57,7 +57,7 @@ def signup():
     if st.button("Join & Start Saving Now!"):
         st.success(f"Welcome {name}! Redirecting to Dashboard...")
         time.sleep(1)
-        st.experimental_rerun()
+        st.rerun()
 
 def dashboard():
     st.title("📊 Your Personalized Savings Dashboard")
