@@ -4,103 +4,113 @@
 # In[2]:
 
 import streamlit as st
-import time
-import pandas as pd
-import random
+import os
 import matplotlib.pyplot as plt
+import numpy as np
+import time
 
-# Ensure images exist in the correct directory
-def load_image(filename, url=None):
-    try:
-        return filename  # If file exists locally
-    except:
-        return url  # If using a URL fallback
+# Set page config
+st.set_page_config(page_title="Smart Savings", page_icon="💰", layout="wide")
 
-# Sidebar Navigation
-st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Dashboard", "Reviews", "Goal Tracking"])
+# Define file paths for logos
+hdfc_logo = "images.png"
+sbi_logo = "2a2c1d90075390b22e7e6060254dab0d.jpg"
 
-# -------------------- PAGE: HOME --------------------
-if page == "Home":
-    st.title("💰 Smart Finance: Nudge Your Way to Wealth!")
+# Load and display logos if available
+st.sidebar.header("🏦 Endorsed By")
+if os.path.exists(hdfc_logo) and os.path.exists(sbi_logo):
+    st.sidebar.image([hdfc_logo, sbi_logo], width=100)
+else:
+    st.sidebar.warning("Some logos are missing. Please check file paths.")
 
-    # Dynamic Live Counter (Not recurring)
-    total_savings = 500000000  # ₹500 Cr
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.markdown(f"### **₹{total_savings:,} Saved by Users!** 🏦")
-    with col2:
-        st.image(["hdfc_logo.png", "sbi_logo.png"], width=80)
+# Navigation
+page = st.sidebar.radio("📌 Navigate", ["Home", "Savings Tracker", "Leaderboard"])
 
-    # Behavioral Prompt
-    st.subheader("🚀 'The smartest way to save money without changing your lifestyle.'")
-
-    # Fake Savings Graph
-    st.markdown("### 📊 How Our Users Have Grown Their Savings Over the Year")
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    savings = [random.randint(20000, 100000) for _ in months]
+# Function to create a fake savings graph
+def plot_savings_graph():
+    years = np.arange(2015, 2025, 1)
+    savings = np.cumsum(np.random.randint(5, 20, size=len(years))) * 10  # Fake increasing savings
 
     fig, ax = plt.subplots()
-    ax.plot(months, savings, marker='o', color='red')
+    ax.plot(years, savings, color="red", linewidth=2)
     ax.set_facecolor("none")  # Transparent background
+    fig.patch.set_alpha(0)  # Transparent figure background
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Total Savings (in Lakhs)")
+    ax.set_title("💰 Savings Growth Over Time")
     st.pyplot(fig)
 
-    st.markdown("💡 *Our users have consistently increased their savings by following our behavioral nudges!*")
+# Function to show a live savings counter
+def live_savings_counter():
+    total_savings = 500  # Start at ₹500 Cr
+    counter_placeholder = st.empty()
 
-# -------------------- PAGE: DASHBOARD --------------------
-elif page == "Dashboard":
-    st.title("📈 Your Finance Dashboard")
-    
-    # Gamification Elements
-    streak = random.randint(1, 10)
-    st.subheader(f"🔥 You're on a {streak}-day savings streak! Keep going!")
+    for _ in range(10):  # Simulate live counter update
+        total_savings += np.random.randint(1, 10)  # Fake increase
+        counter_placeholder.subheader(f"💸 ₹{total_savings} Cr saved by users!")
+        time.sleep(1)
 
-    # Budget Tracker
-    spent = random.randint(5000, 20000)
-    limit = 25000
-    st.progress(spent / limit)
-    st.markdown(f"💸 You've spent ₹{spent} this month. *Stay within your ₹{limit} budget!*")
+# Home Page
+if page == "Home":
+    st.title("🚀 Smart Savings - Achieve Your Financial Goals")
+    st.markdown("### Make smart spending decisions and build wealth with science-backed strategies.")
 
-    # Pre-commitment Bias
-    if st.button("Record Message to Future Self 🎥"):
-        st.markdown("📹 *Recording your message... 'Hey future me, keep saving!'*")
+    # Live Savings Counter
+    live_savings_counter()
 
-    # Social Influence - Peer Comparison
-    percentile = random.randint(10, 90)
-    st.subheader(f"🏆 Your savings rank in the **top {100 - percentile}%** of users your age!")
+    # Show savings graph
+    st.markdown("### 📊 How People Are Saving Over Time")
+    plot_savings_graph()
 
-# -------------------- PAGE: REVIEWS --------------------
-elif page == "Reviews":
-    st.title("🌟 What Our Users Say")
-    
-    # Fake Reviews with Star Ratings
+    # Fake Reviews
+    st.markdown("### ⭐ Customer Reviews")
     reviews = [
-        ("Amit Sharma", 5, "This platform changed my financial habits forever!"),
-        ("Priya Mehta", 4, "Love the gamification and nudges. Super effective!"),
-        ("Rahul Verma", 5, "Started saving ₹10,000 per month without even noticing."),
-        ("Sonia Kapoor", 4, "Wish I knew about this earlier. Smart savings strategies!"),
-        ("Arjun Desai", 5, "Peer comparison and goal tracking keep me motivated."),
+        {"name": "Rahul M.", "rating": "⭐⭐⭐⭐⭐", "comment": "Best savings tracker! Helped me stay on budget."},
+        {"name": "Sneha P.", "rating": "⭐⭐⭐⭐⭐", "comment": "Love the financial tips. The leaderboard keeps me motivated!"},
+        {"name": "Amit K.", "rating": "⭐⭐⭐⭐", "comment": "Simple & effective! Highly recommended."},
     ]
+    for review in reviews:
+        st.write(f"**{review['name']}** {review['rating']}")
+        st.write(f"📝 {review['comment']}")
+        st.divider()
 
-    for name, rating, text in reviews:
-        st.subheader(f"⭐ {'⭐' * rating} ({rating}/5)")
-        st.write(f"**{name}**: {text}")
+# Savings Tracker Page
+elif page == "Savings Tracker":
+    st.title("📈 Track Your Savings")
+    
+    # Savings Goal Input
+    savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000)
+    st.success(f"Your goal: ₹{savings_goal:,}")
 
-# -------------------- PAGE: GOAL TRACKING --------------------
-elif page == "Goal Tracking":
-    st.title("🎯 Achieve Your Savings Goals")
+    # Progress Bar
+    saved_amount = np.random.randint(0, savings_goal)
+    progress = saved_amount / savings_goal
+    st.progress(progress)
+    st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
 
-    goal = st.slider("Set your savings goal (₹)", min_value=5000, max_value=50000, step=5000, value=20000)
-    saved = random.randint(1000, goal)
-    st.progress(saved / goal)
-    st.markdown(f"📊 You've saved ₹{saved} out of ₹{goal}. *Keep going!*")
+    # Earn badges
+    if progress > 0.75:
+        st.balloons()
+        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
 
-    # Loss Aversion Nudge
-    if saved < goal * 0.5:
-        st.warning(f"⚠️ You're behind schedule! Missing your goal could cost you ₹{goal - saved} over time.")
+# Leaderboard Page
+elif page == "Leaderboard":
+    st.title("🏆 Savings Leaderboard")
+    
+    # Fake leaderboard
+    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram"]
+    savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
+    
+    st.table({"User": users, "Total Savings (₹)": savings})
 
-    # WhatsApp Integration (Fake CTA)
-    st.button("📩 Get Weekly Savings Tips on WhatsApp")
+    # Peer Comparison
+    user_savings = np.random.randint(50000, 200000)
+    rank = sum(user_savings < np.array(savings))
+    st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
 
-# -------------------- END --------------------
-st.sidebar.info("Built using behavioral science to make saving effortless! 🚀")
+# WhatsApp integration (Fake)
+st.sidebar.markdown("📩 **Stay on Track**")
+st.sidebar.write("Receive weekly savings tips on WhatsApp.")
+phone = st.sidebar.text_input("📱 Enter your number")
+if phone:
+    st.sidebar.success("✅ You'll receive tips on WhatsApp!")
