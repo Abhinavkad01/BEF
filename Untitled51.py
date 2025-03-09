@@ -4,79 +4,83 @@
 # In[2]:
 
 import streamlit as st
-import os
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
-# Set Page Config
-st.set_page_config(page_title="Financial Wellness Platform", layout="wide")
-
-# Function to load images (fallback to URLs if not found)
 def load_image(filename, url):
     return filename if os.path.exists(filename) else url
 
-# Image Paths / URLs
-hdfc_logo = load_image("hdfc_logo.png", "https://upload.wikimedia.org/wikipedia/en/thumb/7/72/HDFC_Bank_logo.svg/1200px-HDFC_Bank_logo.svg.png")
-sbi_logo = load_image("sbi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/4/4e/SBI-logo.svg")
-amfi_logo = load_image("amfi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/a/a8/AMFI_India_logo.png")
+def home_page():
+    st.title("💰 Smart Savings - Your Financial Future Starts Here!")
+    
+    # Live Counter (Bandwagon Effect)
+    st.markdown("## ₹500 Cr saved by users! 🔥")
+    
+    # Fake Reviews & Ratings
+    st.markdown("### ⭐⭐⭐⭐⭐ 'This app changed my life!' - Rahul M.")
+    st.markdown("### ⭐⭐⭐⭐⭐ 'Best savings tool I've ever used!' - Priya S.")
+    
+    # Endorsements
+    hdfc_logo = load_image("hdfc_logo.png", "https://upload.wikimedia.org/wikipedia/en/thumb/7/72/HDFC_Bank_logo.svg/1200px-HDFC_Bank_logo.svg.png")
+    sbi_logo = load_image("sbi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/4/4e/SBI-logo.svg")
+    amfi_logo = load_image("amfi_logo.png", "https://upload.wikimedia.org/wikipedia/commons/a/a8/AMFI_India_logo.png")
+    st.image([hdfc_logo, sbi_logo, amfi_logo], width=150)
+    
+    # Peer Comparison
+    st.markdown("### Your savings are in the **top 10%** of people your age!")
 
-# Sidebar - Endorsements & Trust Signals
-with st.sidebar:
-    st.image([hdfc_logo, sbi_logo, amfi_logo], width=100)
-    st.markdown("### Recommended by Top Financial Experts")
+def dashboard_page():
+    st.title("📊 Savings Dashboard")
+    
+    # Fake Savings Data
+    months = np.arange(1, 13)
+    savings = np.cumsum(np.random.randint(5000, 15000, size=12))
+    
+    fig, ax = plt.subplots(facecolor='none')
+    ax.patch.set_alpha(0)
+    ax.plot(months, savings, marker='o', linestyle='-', color='red', linewidth=2)
+    ax.set_xlabel("Month", color='white')
+    ax.set_ylabel("Total Savings (₹)", color='white')
+    ax.set_title("Your Savings Trend", color='white')
+    ax.set_facecolor('none')
+    fig.patch.set_alpha(0)
+    
+    st.pyplot(fig)
 
-# Fake Live Counter - ₹500 Cr saved by users
-st.markdown("## 💰 ₹500 Cr saved by users!")
-st.markdown("*(Scarcity & Bandwagon Effect)*")
+def challenges_page():
+    st.title("🏆 Challenges & Rewards")
+    st.markdown("### **Badges Earned:**")
+    st.image("https://img.icons8.com/color/96/medal.png", width=80)
+    st.markdown("✅ **₹1L Club - Unlocked!**")
+    st.markdown("🔒 **₹5L Club - Only 2% achieve this!**")
 
-# Fake Line Graph - Showing Savings Over Time
-st.markdown("### 📊 Savings Growth Over the Year")
+def commitment_page():
+    st.title("🎥 Record a Message to Your Future Self")
+    st.write("Tell your future self why you’re saving money. Your message will be replayed to keep you motivated.")
+    video = st.file_uploader("Upload your video message (MP4, AVI, etc.)", type=["mp4", "avi"])
+    if video:
+        st.video(video)
 
-# Create Transparent Background Graph
-fig, ax = plt.subplots(facecolor='none')  # Transparent figure background
-ax.patch.set_alpha(0)  # Set background of the axes transparent
+def whatsapp_page():
+    st.title("📩 Get Weekly Tips on WhatsApp!")
+    st.write("Stay on track with personalized financial advice directly on WhatsApp.")
+    st.button("Subscribe via WhatsApp")
 
-# Generate Fake Savings Data
-months = np.arange(1, 13)
-savings = np.cumsum(np.random.randint(5000, 15000, size=12))  # Fake increasing savings data
+def main():
+    st.sidebar.title("📌 Navigation")
+    page = st.sidebar.radio("Go to", ["Home", "Dashboard", "Challenges", "Commitment", "WhatsApp"])
+    
+    if page == "Home":
+        home_page()
+    elif page == "Dashboard":
+        dashboard_page()
+    elif page == "Challenges":
+        challenges_page()
+    elif page == "Commitment":
+        commitment_page()
+    elif page == "WhatsApp":
+        whatsapp_page()
 
-# Plot Data with Red Line
-ax.plot(months, savings, marker='o', linestyle='-', color='red', linewidth=2)
-
-# Set Labels and Styles
-ax.set_xlabel("Month", color='white')  # White text for visibility
-ax.set_ylabel("Total Savings (₹)", color='white')
-ax.set_xticks(months)
-ax.set_title("Savings Trend Over the Year", color='white')
-
-# Remove Background Grid
-ax.set_facecolor('none')  # Transparent axis background
-fig.patch.set_alpha(0)  # Transparent figure background
-
-# Display Graph
-st.pyplot(fig)
-
-# Commitment Bias - Video Message to Future Self
-st.markdown("## 🎥 Record a Message to Your Future Self")
-st.write("Tell your future self why you’re saving money. Your message will be replayed to keep you motivated.")
-video = st.file_uploader("Upload your video message (MP4, AVI, etc.)", type=["mp4", "avi"])
-
-# Gamification - Challenges & Rewards
-st.markdown("## 🏆 Challenges & Rewards")
-st.write("Complete smart spending challenges and earn badges for saving efficiently!")
-st.image("https://img.icons8.com/color/96/medal.png", width=80)  # Example badge icon
-
-# Peer Comparison & Leaderboard
-st.markdown("## 📈 Leaderboard - Where Do You Stand?")
-leaderboard_data = {
-    "User": ["You", "Rahul", "Priya", "Amit", "Sneha"],
-    "Savings (₹)": [75000, 80000, 70000, 65000, 62000]
-}
-st.table(leaderboard_data)
-
-# WhatsApp Integration - Weekly Savings Tips
-st.markdown("## 📩 Get Weekly Tips on WhatsApp!")
-st.write("Stay on track with personalized financial advice directly on WhatsApp.")
-st.button("Subscribe via WhatsApp")
-
-st.success("🔹 This platform is built using behavioral economics principles to maximize user engagement and savings!")
+if __name__ == "__main__":
+    main()
