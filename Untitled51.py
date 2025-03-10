@@ -23,7 +23,7 @@ Groww_logo = "Groww.jpg"
 # Load and display logos if available
 st.sidebar.header("🏦 Endorsed By")
 if os.path.exists(hdfc_logo) and os.path.exists(sbi_logo):
-    st.sidebar.image([hdfc_logo, sbi_logo, Groww_logo], width=100)
+    st.sidebar.image([hdfc_logo, sbi_logo, Groww_logo], width=70)
 else:
     st.sidebar.warning("Some logos are missing. Please check file paths.")
 
