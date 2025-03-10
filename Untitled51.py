@@ -241,6 +241,38 @@ elif page == "Commitment Contracts":
     # Financial Tips Page
 elif page == "Financial Tips":
     st.title("💡 Smart Financial Tips")
+    
+    # AI-Powered Savings & Finance Tips
+    ai_tips = [
+        "🤖 AI Suggestion: Based on your spending pattern, reducing dining out by 20% can save ₹5,000 monthly!",
+        "📊 AI Insight: Investing in an index fund for 5 years could yield 12% annual returns!",
+        "💡 Tip: Set up an auto-debit savings plan to avoid temptation spending.",
+        "🔄 Reinvesting your tax refunds can accelerate your wealth growth!",
+        "🧠 Behavioral Trick: Name your savings account (e.g., 'Dream Home Fund') to stay motivated!"
+    ]
+    st.write(random.choice(ai_tips))
+    
+    if st.button("Get Another AI Tip"):
+        st.write(random.choice(ai_tips))
+    
+    # Paid Expert Advice Section
+    st.markdown("### 🎓 Get Personalized Advice from Finance Experts")
+    experts = [
+        {"name": "Dr. Anil Mehta", "experience": "Ex-Chief Economist at HDFC Bank", "education": "PhD in Behavioral Finance"},
+        {"name": "Priya Sharma", "experience": "Former Investment Manager at Goldman Sachs", "education": "MBA, Harvard Business School"},
+        {"name": "Rahul Khanna", "experience": "Senior Financial Advisor at Morgan Stanley", "education": "CFA, London Business School"},
+        {"name": "Sneha Patel", "experience": "Ex-Head of Personal Finance at ICICI", "education": "Certified Financial Planner (CFP)"}
+    ]
+    
+    for expert in experts:
+        st.write(f"**{expert['name']}** - {expert['experience']} ({expert['education']})")
+        if st.button(f"Book a Session with {expert['name']}"):
+            st.success(f"📅 A consultation request has been sent to {expert['name']}! They will reach out to you soon.")
+    
+    st.markdown("---")
+    
+    # Standard Financial Tips
+    st.markdown("### 📌 Quick Financial Tips")
     tips = [
         "🚗 Want to buy a car? You need to save ₹10,000 per month for 3 years!",
         "🏠 Planning to buy a house? Start investing 20% of your salary today!",
@@ -249,8 +281,10 @@ elif page == "Financial Tips":
         "📈 Want to retire early? Increase your monthly investments by just 5% every year!"
     ]
     st.write(random.choice(tips))
+    
     if st.button("Get Another Tip"):
         st.write(random.choice(tips))
+
 # Community & Challenges
 elif page == "Community & Challenges":
     st.title("🌍 Community & Challenges")
