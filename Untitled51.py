@@ -28,7 +28,8 @@ else:
 st.sidebar.markdown("🌟 **12,000+ users reached their savings goals this month!**")
 
 # Navigation
-page = st.sidebar.radio("📌 Navigate", ["Signup", "Home", "Savings Tracker", "Leaderboard", "Commitment Contracts", "Financial Tips"]) 
+page = st.sidebar.radio("📌 Navigate", ["Signup", "Home", "Savings Tracker", "Leaderboard", "Commitment Contracts", "Financial Tips", "Community & Challenges"]) 
+
 
 # Signup Page
 if page == "Signup":
@@ -70,6 +71,12 @@ def live_savings_counter():
         total_savings += np.random.randint(1, 10)  # Fake increase
         counter_placeholder.subheader(f"💸 ₹{total_savings} Cr saved by users!")
         time.sleep(1)
+# Lock-in Mechanism for Withdrawals
+if page == "Savings Tracker":
+    st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
+    if st.button("Request Withdrawal"):
+        st.warning("⏳ Your request has been placed. Withdrawals require a 24-hour delay before execution.")
+
 
 # Home Page
 if page == "Home":
@@ -218,7 +225,39 @@ elif page == "Financial Tips":
     st.write(random.choice(tips))
     if st.button("Get Another Tip"):
         st.write(random.choice(tips))
-
+# Community & Challenges
+elif page == "Community & Challenges":
+    st.title("🌍 Community & Challenges")
+    
+    # Savings Streak Challenge
+    st.markdown("### 🔥 Savings Streak Challenge")
+    st.info("Save consistently for 30 days and win exclusive rewards!")
+    
+    # Weekly Savings Battle
+    st.markdown("### 🏆 Weekly Savings Battle")
+    st.write("Compete with your friends and see who saves the most each week!")
+    
+    # Interactive Savings Goals
+    st.markdown("### 🎯 Interactive Savings Goals")
+    if st.button("Set a New Challenge Goal"):
+        st.success("✅ Challenge Goal Created! Keep pushing towards your target.")
+    
+    # Social Sharing for Motivation
+    st.markdown("### 📢 Share Your Progress")
+    if st.button("Share My Savings Streak on Social Media 🎯"):
+        st.success("✅ Your progress has been shared successfully!")
+    
+    # Join Savings Support Groups
+    st.markdown("### 🤝 Join a Savings Support Group")
+    st.write("Find like-minded savers and stay accountable!")
+    if st.button("Find a Group"):
+        st.success("✅ You've been added to a savings group!")
+    
+    # WhatsApp Community Join
+    st.markdown("### 📲 Join Our WhatsApp Savings Community")
+    phone = st.text_input("📱 Enter your number to join community updates")
+    if phone:
+        st.success("✅ You'll receive weekly savings tips & community updates!")
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
 st.sidebar.write("Receive weekly savings tips on WhatsApp.")
