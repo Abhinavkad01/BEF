@@ -54,6 +54,12 @@ if page == "Signup":
         st.image(signup_image, use_column_width=True)
     else:
         st.warning("Signup image not found. Please check file path.")
+    # Add an image below the signup form
+    signup_image = "Screenshot 2025-03-10 120604.png.png"  # Placeholder image file
+    if os.path.exists(signup_image):
+        st.image(signup_image, use_column_width=True)
+    else:
+        st.warning("Signup image not found. Please check file path.")
 # Function to create a fake savings graph
 def plot_savings_graph():
     years = np.arange(2015, 2025, 1)
