@@ -325,9 +325,9 @@ elif page == "Community & Challenges":
         st.success("✅ You'll receive weekly savings tips & community updates!")
 # WhatsApp integration (Fake)
 st.sidebar.markdown("📩 **Stay on Track**")
-st.sidebar.write("Receive weekly savings tips on WhatsApp.")
+st.sidebar.write("Receive weekly savings tips on our newsletter.")
 phone = st.sidebar.text_input("📱 Enter your number")
 if phone:
-    st.sidebar.success("✅ You'll receive tips on WhatsApp!")
+    st.sidebar.success("✅ You'll receive Receive weekly newsletter")
 
 
