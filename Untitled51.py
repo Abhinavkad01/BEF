@@ -18,11 +18,12 @@ st.sidebar.title("💰 Smart Savings")
 # Define file paths for logos
 hdfc_logo = "images.png"
 sbi_logo = "2a2c1d90075390b22e7e6060254dab0d.jpg"
+Groww_logo = "Groww.jpg"
 
 # Load and display logos if available
 st.sidebar.header("🏦 Endorsed By")
 if os.path.exists(hdfc_logo) and os.path.exists(sbi_logo):
-    st.sidebar.image([hdfc_logo, sbi_logo], width=100)
+    st.sidebar.image([hdfc_logo, sbi_logo, Groww_logo], width=100)
 else:
     st.sidebar.warning("Some logos are missing. Please check file paths.")
 
