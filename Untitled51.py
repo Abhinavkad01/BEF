@@ -35,6 +35,14 @@ page = st.sidebar.radio("📌 Navigate", ["Signup", "Home", "Savings Tracker", "
 if page == "Signup":
     st.title("🔐 Join Smart Savings Today")
     st.markdown("### Take control of your financial future with our smart savings platform!")
+# Add images only under the Signup Page
+    signup_image = ["Screenshot 2025-03-10 193239.png"]
+    for image in signup_image:
+        if os.path.exists(image):
+            st.image(image, use_container_width=True)
+        else:
+            st.warning(f"{image} not found. Please check file path.")
+
     
     # Signup Form
     name = st.text_input("👤 Full Name")
