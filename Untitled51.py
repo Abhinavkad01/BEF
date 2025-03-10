@@ -12,6 +12,8 @@ import random
 
 # Set page config - MUST BE FIRST
 st.set_page_config(page_title="Smart Savings", page_icon="💰", layout="wide")
+# Website Name
+st.sidebar.title("💰 Smart Savings")
 
 # Define file paths for logos
 hdfc_logo = "images.png"
