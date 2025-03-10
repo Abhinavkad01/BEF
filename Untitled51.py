@@ -49,7 +49,7 @@ if page == "Signup":
         else:
             st.error("⚠️ Please fill in all fields and agree to the terms.")
     # Add images only under the Signup Page
-    signup_images = ["Screenshot 2025-03-10 115214.png", "Screenshot 2025-03-10 120604.png"]
+    signup_images = ["Screenshot 2025-03-10 122106.png", "Screenshot 2025-03-10 120604.png"]
     for image in signup_images:
         if os.path.exists(image):
             st.image(image, use_container_width=True)
