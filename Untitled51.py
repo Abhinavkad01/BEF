@@ -86,6 +86,12 @@ if page == "Home":
     # Streak Tracking
     streak_days = random.randint(1, 10)
     st.success(f"🔥 You're on a {streak_days}-day savings streak! Keep going!")
+
+    # Loss Aversion Banner
+    st.warning("⚠️ Indians lose ₹15,000/year due to impulse spending. Fix it now!")
+    
+    # Peer Accountability
+    st.info("👀 Your friend Raj completed his savings goal—can you?")
     
     # Live Savings Counter
     live_savings_counter()
@@ -93,6 +99,7 @@ if page == "Home":
     # Show savings graph
     st.markdown("### 📊 How People Are Saving Over Time")
     plot_savings_graph()
+    
     
     # Fake Reviews
     st.markdown("### ⭐ Customer Reviews")
@@ -157,6 +164,12 @@ elif page == "Savings Tracker":
     for goal in remaining_goals:
         remaining_amount = goal["total"] - goal["saved"]
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,} (Need ₹{remaining_amount:,} more)")
+
+    # Anchoring Bias - Recommended Savings
+    st.markdown("### 💡 Suggested Savings Amounts")
+    recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
+    savings_choice = st.radio("Select a recommended amount to start saving:", recommended_savings, index=0)
+    st.success(f"✅ You've chosen to save {savings_choice} per month!")
     
     
     # Earn badges
