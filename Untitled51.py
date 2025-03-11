@@ -146,11 +146,27 @@ elif page == "Savings Tracker":
      # Loss Framing for Withdrawals
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
-    # New Element: Upcoming Bills Reminder
-    st.subheader("📅 Upcoming Bills")
-    upcoming_bills = {"Credit Card Payment": "₹5,000 - March 15", "Electricity Bill": "₹2,500 - March 20", "Internet Bill": "₹1,000 - March 25"}
-    for bill, date in upcoming_bills.items():
-        st.warning(f"📌 {bill}: {date}")
+     # Upcoming Bills Reminder with Gradient Background
+    st.subheader("📅 Upcoming Bills & Payments")
+    today = datetime.today()
+    bills = [
+        {"name": "Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
+        {"name": "Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
+        {"name": "Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
+    ]
+    
+    for bill in bills:
+        days_remaining = (bill['due'] - today).days
+        if days_remaining <= 5:
+            bg_color = "#ffcccc"  # Red for urgent
+        elif days_remaining <= 10:
+            bg_color = "#ffebcc"  # Orange for upcoming
+        else:
+            bg_color = "#ccffcc"  # Green for later bills
+        
+        st.markdown(f"<div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>"
+                    f"💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})</div>",
+                    unsafe_allow_html=True)
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
