@@ -156,8 +156,6 @@ elif page == "Savings Tracker":
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
     col4.metric("🎯 Monthly Goal", f"₹{monthly_goal:,}")
     col5.metric("📌 Total Due", f"₹{total_due:,}")
- 
-    
 
     # Progress Tracker
     savings_goal = monthly_goal  # Link the savings goal to the monthly goal
@@ -165,45 +163,43 @@ elif page == "Savings Tracker":
     progress = saved_amount / savings_goal if savings_goal > 0 else 0
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
-    
-     # Loss Framing for Withdrawals
+
+    # Loss Framing for Withdrawals
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("🔒⚠️ A withdrawal request has been placed. You can withdraw money after 24 hours.")
-        
+
     # Upcoming Bills Reminder with Gradient Background
-st.subheader("📅 Upcoming Bills & Payments")
-today = datetime.today()
-bills = [
-    {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
-    {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
-    {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
-]
+    st.subheader("📅 Upcoming Bills & Payments")
+    today = datetime.today()
+    bills = [
+        {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
+        {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
+        {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
+    ]
 
-for bill in bills:
-    days_remaining = (bill['due'] - today).days
-    if days_remaining <= 5:
-        bg_color = "#ffcccc"  # Red for urgent
-    elif days_remaining <= 10:
-        bg_color = "#ffebcc"  # Orange for upcoming
-    else:
-        bg_color = "#ccffcc"  # Green for later bills
+    for bill in bills:
+        days_remaining = (bill['due'] - today).days
+        if days_remaining <= 5:
+            bg_color = "#ffcccc"  # Red for urgent
+        elif days_remaining <= 10:
+            bg_color = "#ffebcc"  # Orange for upcoming
+        else:
+            bg_color = "#ccffcc"  # Green for later bills
 
-    st.markdown(f"""
-        <div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>
-            💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
-        </div>
-    """, unsafe_allow_html=True)
+        st.markdown(f"""
+            <div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>
+                💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
+            </div>
+        """, unsafe_allow_html=True)
 
-# Loss Framing for Adjusting Savings Goal
-if st.button("Adjust Savings Goal", key="adjust_goal_button"):
-    st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    # Loss Framing for Adjusting Savings Goal
+    if st.button("Adjust Savings Goal", key="adjust_goal_button"):
+        st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
 
-    
-
-    # Expenses Overview Bar Chart (Professional & Readable)
+    # Expenses Overview Bar Chart
     st.subheader("📊 Expenses Overview")
     expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-    
+
     fig, ax = plt.subplots(figsize=(5, 3))  # Smaller size
     colors = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78']  # Subtle, professional colors
     ax.bar(expenses.keys(), expenses.values(), color=colors)
@@ -211,7 +207,7 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     ax.set_title("Monthly Expenses")
     ax.tick_params(axis='x', rotation=30)  # Rotate x-axis labels for better readability
     st.pyplot(fig)
-    
+
     # Savings Goals
     st.subheader("🌟 Set A New Savings Goal")
     st.markdown("> **“Save today for a better tomorrow. Every rupee counts! 💪”**")
@@ -221,9 +217,7 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
     st.success(f"Your goal: ₹{savings_goal:,}")
 
-
-
-   # Monthly Savings Pie Chart
+    # Monthly Savings Pie Chart
     st.subheader("📊 Monthly Savings Distribution")
     labels = ['Investments', 'Emergency Fund', 'Vacation Savings', 'Miscellaneous']
     data = [random.randint(5000, 20000) for _ in range(4)]
@@ -232,8 +226,6 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     ax.set_title("Savings Breakdown", fontsize=12, fontweight='bold')
     st.pyplot(fig)
 
-
-    
     # Transaction History Graph
     st.subheader("📈 Transaction History")
     days_options = {"7 days": 7, "15 days": 15, "30 days": 30, "2 months": 60}
@@ -251,6 +243,7 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     ax.legend()
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
+
     # Fake Monthly Savings Graph
     months = np.arange(1, 13)
     monthly_savings = np.random.randint(5000, 20000, size=12)
@@ -261,7 +254,6 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     ax.set_title("Monthly Savings Over the Year")
     st.pyplot(fig)
 
-    
     # Goals with Progress
     st.subheader("🎯 Future Goals")
     goals = [
@@ -272,7 +264,7 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
     ]
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
-    
+
     # Suggested Savings Amounts
     st.subheader("💡 Suggested Savings")
     recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
@@ -281,22 +273,14 @@ if st.button("Adjust Savings Goal", key="adjust_goal_button"):
 
     # Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
-        tips = [
-            "Automate savings to avoid decision fatigue!",
-            "Invest at least 20% of your income.",
-            "Track expenses weekly to stay accountable."
-        ]
-        news = [
-            "Markets hit all-time high today!",
-            "New savings scheme launched by the government.",
-            "Top CEOs reveal their money-saving habits!"
-        ]
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
     # Achievement Badges
     if progress > 0.75:
         st.balloons()
-        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")    # Leaderboard Page
+        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
+
+# Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
     
