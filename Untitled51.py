@@ -285,7 +285,7 @@ def colored_metric(label, amount):
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
 
 # Leaderboard Page
-   elif page == "Leaderboard":
+elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
     
     # Fake leaderboard
