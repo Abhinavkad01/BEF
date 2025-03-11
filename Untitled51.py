@@ -176,6 +176,16 @@ elif page == "Savings Tracker":
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
 
+    # New Element: Monthly Savings Pie Chart
+    st.subheader("📊 Monthly Savings Distribution")
+    labels = ['Investments', 'Emergency Fund', 'Vacation Savings', 'Miscellaneous']
+    data = [random.randint(5000, 20000) for _ in range(4)]
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.pie(data, labels=labels, autopct='%1.1f%%', colors=['#ff7f0e', '#aec7e8', '#1f77b4', '#ffbb78'])
+    ax.set_title("Savings Breakdown")
+    st.pyplot(fig)
+
+
     # Loss Framing for Withdrawals
     if st.button("Adjust Savings Goal", key="adjust_goal_button"):
         st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
