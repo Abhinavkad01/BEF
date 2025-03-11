@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 import random
+from datetime import datetime
 
 # Set page config - MUST BE FIRST
 st.set_page_config(page_title="Smart Savings", page_icon="💰", layout="wide")
