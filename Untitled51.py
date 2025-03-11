@@ -133,14 +133,22 @@ if page == "Home":
 # Page Title
 st.title("📈 Track Your Savings")
 
-# Financial Wellness Score
-score = random.randint(60, 100)
-st.markdown(f"## 🏆 Financial Wellness Score: **{score}/100**")
+# 🔹 Show Accounts Overview **ONLY on Savings Page**
+if "savings" in st.session_state.get("current_page", "savings"):  # Ensures it's only on this page
+    st.markdown("### 💰 Accounts Overview")
 
-# Account Overview
-st.subheader("💰 Accounts Overview")
-accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
-st.write(accounts)
+    # Sample account data
+    accounts = {
+        "Checking": 25000,
+        "Credit Card": -5000,
+        "Savings": 80000
+    }
+
+    # Display accounts in columns for a neat layout
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Checking", f"₹{accounts['Checking']:,}")
+    col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
+    col3.metric("Savings", f"₹{accounts['Savings']:,}")
 
 # Savings Goals
 default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
