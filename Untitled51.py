@@ -178,6 +178,9 @@ elif page == "Savings Tracker":
         st.markdown(f"<div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>"
                     f"{bill['name']} - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})</div>",
                     unsafe_allow_html=True)
+        # Loss Framing for Withdrawals
+         if st.button("Adjust Savings Goal", key="adjust_goal_button"):
+            st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
@@ -213,9 +216,7 @@ elif page == "Savings Tracker":
     st.pyplot(fig)
 
 
-    # Loss Framing for Withdrawals
-    if st.button("Adjust Savings Goal", key="adjust_goal_button"):
-        st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    
     # Transaction History Graph
     st.subheader("📈 Transaction History")
     days_options = {"7 days": 7, "15 days": 15, "30 days": 30, "2 months": 60}
