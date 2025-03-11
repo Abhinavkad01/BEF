@@ -145,7 +145,13 @@ elif page == "Savings Tracker":
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
     col4.metric("🎯 Monthly Goal", f"₹{monthly_goal:,}")
-    
+
+    # Progress Tracker
+    savings_goal = monthly_goal  # Link the savings goal to the monthly goal
+    saved_amount = accounts["Savings"]  # Link the saved amount to the savings account balance
+    progress = saved_amount / savings_goal if savings_goal > 0 else 0
+    st.progress(progress)
+    st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
     
      # Loss Framing for Withdrawals
     if st.button("Request Withdrawal", key="withdraw_button"):
@@ -191,11 +197,7 @@ elif page == "Savings Tracker":
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
     st.success(f"Your goal: ₹{savings_goal:,}")
 
-    # Progress Bar
-    saved_amount = np.random.randint(0, savings_goal)
-    progress = saved_amount / savings_goal
-    st.progress(progress)
-    st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
+
 
    # Monthly Savings Pie Chart
     st.subheader("📊 Monthly Savings Distribution")
