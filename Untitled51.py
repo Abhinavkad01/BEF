@@ -242,7 +242,7 @@ if page == "Savings Tracker":
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
-    # Goals with Progress
+   # Goals with Progress
     st.subheader("🎯 Future Goals")
     goals = [
         {"name": "Buy a Car", "total": 500000, "saved": random.randint(100000, 400000)},
@@ -250,34 +250,33 @@ if page == "Savings Tracker":
         {"name": "Buy a House", "total": 2000000, "saved": random.randint(500000, 1500000)},
         {"name": "Retirement Fund", "total": 5000000, "saved": random.randint(1000000, 4000000)}
     ]
+    
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
-        
-   # Define finance tips and news
-   tips = [
-    "Start by saving at least 20% of your income every month.",
-    "Invest in index funds for long-term stable growth.",
-    "Avoid impulse spending by following the 24-hour rule.",
-    "Track your daily expenses to identify areas of overspending."
-     ]
 
-   news = [
-    "Stock markets saw a 2% rise amid positive economic reports.",
-    "Interest rates remain steady, affecting mortgage affordability.",
-    "New tax-saving investment schemes announced for 2025.",
-    "Crypto regulations tightened to prevent fraud."
-      ]
+    # Define finance tips and news
+    tips = [
+        "Start by saving at least 20% of your income every month.",
+        "Invest in index funds for long-term stable growth.",
+        "Avoid impulse spending by following the 24-hour rule.",
+        "Track your daily expenses to identify areas of overspending."
+    ]
 
-# Finance Tip & News
+    news = [
+        "Stock markets saw a 2% rise amid positive economic reports.",
+        "Interest rates remain steady, affecting mortgage affordability.",
+        "New tax-saving investment schemes announced for 2025.",
+        "Crypto regulations tightened to prevent fraud."
+    ]
+
+    # Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
-
 
     # Achievement Badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
-
 # Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
