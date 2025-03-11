@@ -180,8 +180,8 @@ elif page == "Savings Tracker":
                 unsafe_allow_html=True)
 
 # Loss Framing for Withdrawals
-if st.button("Adjust Savings Goal", key="adjust_goal_button"):
-    st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    if st.button("Adjust Savings Goal", key="adjust_goal_button"):
+        st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
