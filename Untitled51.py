@@ -179,9 +179,13 @@ elif page == "Savings Tracker":
     deposits = np.random.randint(1000, 5000, size=len(days))
     expenses = np.random.randint(2000, 10000, size=len(days))
 
+    days_smooth = np.linspace(days.min(), days.max(), 300)
+    deposits_smooth = make_interp_spline(days, np.log(deposits + 1))(days_smooth)
+    expenses_smooth = make_interp_spline(days, np.log(expenses + 1))(days_smooth)
+
     fig, ax = plt.subplots(figsize=(6, 3))
-    ax.plot(days, deposits, marker='o', linestyle='-', color='green', label='Deposit')
-    ax.plot(days, expenses, marker='o', linestyle='-', color='red', label='Expense')
+    ax.plot(days_smooth, np.exp(deposits_smooth) - 1, marker='', linestyle='-', color='green', label='Deposit')
+    ax.plot(days_smooth, np.exp(expenses_smooth) - 1, marker='', linestyle='-', color='red', label='Expense')
     ax.set_xlabel("Day")
     ax.set_ylabel("Amount (₹)")
     ax.set_title("Transaction History")
