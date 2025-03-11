@@ -135,16 +135,30 @@ if page == "Home":
         
 elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
-    
 
+
+    # Accounts Overview with Total Due
     st.markdown("### 💰 Accounts Overview")
-    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 60000}
-    monthly_goal = random.randint(85000, 90000)
-    col1, col2, col3, col4 = st.columns(4)
+   accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 60000}
+   monthly_goal = 87500  # Example static goal
+
+   today = datetime.today()
+    bills = [
+    {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
+    {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
+    {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
+      ]
+
+    total_due = sum(bill['amount'] for bill in bills)
+
+    col1, col2, col3, col4, col5 = st.columns(5)
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
     col4.metric("🎯 Monthly Goal", f"₹{monthly_goal:,}")
+    col5.metric("📌 Total Due", f"₹{total_due:,}")
+ 
+    
 
     # Progress Tracker
     savings_goal = monthly_goal  # Link the savings goal to the monthly goal
