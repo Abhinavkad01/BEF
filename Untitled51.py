@@ -156,11 +156,11 @@ def colored_metric(label, amount):
     color = "red" if amount < 0 else "green"
     return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
 
-    col1.markdown(f"**Checking**<br>{colored_metric('Checking', accounts['Checking'])}", unsafe_allow_html=True)
-    col2.markdown(f"**Credit Card**<br>{colored_metric('Credit Card', accounts['Credit Card'])}", unsafe_allow_html=True)
-    col3.markdown(f"**Savings**<br>{colored_metric('Savings', accounts['Savings'])}", unsafe_allow_html=True)
-    col4.markdown(f"**🎯 Monthly Goal**<br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span>", unsafe_allow_html=True)
-    col5.markdown(f"**📌 Total Due**<br>{colored_metric('Total Due', -total_due)}", unsafe_allow_html=True)
+  col1.markdown(f"<div style='text-align:center;'><b>Checking</b><br>{colored_metric('Checking', accounts['Checking'])}</div>", unsafe_allow_html=True)
+  col2.markdown(f"<div style='text-align:center;'><b>Credit Card</b><br>{colored_metric('Credit Card', accounts['Credit Card'])}</div>", unsafe_allow_html=True)
+  col3.markdown(f"<div style='text-align:center;'><b>Savings</b><br>{colored_metric('Savings', accounts['Savings'])}</div>", unsafe_allow_html=True)
+  col4.markdown(f"<div style='text-align:center;'><b>🎯 Monthly Goal</b><br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span></div>", unsafe_allow_html=True)
+  col5.markdown(f"<div style='text-align:center;'><b>📌 Total Due</b><br>{colored_metric('Total Due', -total_due)}</div>", unsafe_allow_html=True)
 # Progress Tracker
     savings_goal = monthly_goal  # Link the savings goal to the monthly goal
     saved_amount = accounts["Savings"]  # Link the saved amount to the savings account balance
@@ -283,41 +283,37 @@ def colored_metric(label, amount):
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
+# Set page config
+st.set_page_config(page_title="Leaderboard", page_icon="🏆", layout="wide")
 
 # Leaderboard Page
-elif page == "Leaderboard":
-    st.title("🏆 Savings Leaderboard")
-    
-    # Fake leaderboard
-    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
-    savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
+st.title("🏆 Savings Leaderboard")
 
+# Fake leaderboard
+users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
+savings = sorted([random.randint(50000, 300000) for _ in users], reverse=True)
 
-    # Fake leaderboard
-    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
-    savings = sorted([random.randint(50000, 300000) for _ in users], reverse=True)
-    
-    # Identify user's position
-    user_savings = random.randint(50000, 200000)
-    rank = sum(user_savings < np.array(savings))
-    
-    # Bar chart visualization with transparency and subtle colors
-    fig, ax = plt.subplots(figsize=(5, 3))
-    colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
-    ax.bar(users, savings, color=colors)
-    ax.set_facecolor("none")  # Transparent background
-    fig.patch.set_alpha(0)  # Transparent figure background
-    ax.set_title(" Savings Distribution - Where You Stand", color='black')
-    ax.set_ylabel("Total Savings (₹)", color='black')
-    ax.set_xticklabels(users, rotation=30, color='black')
-    ax.set_yticklabels(savings,  color='black')
-    st.pyplot(fig)
-    
-    st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
-    
-    # Public Accountability
-    if st.button("Share My Progress on Social Media! 🎯"):
-        st.success("✅ Your savings progress has been shared successfully!")
+# Identify user's position
+user_savings = random.randint(50000, 200000)
+rank = sum(user_savings < np.array(savings))
+
+# Bar chart visualization with transparency and subtle colors
+fig, ax = plt.subplots(figsize=(5, 3))
+colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
+ax.bar(users, savings, color=colors)
+ax.set_facecolor("none")  # Transparent background
+fig.patch.set_alpha(0)  # Transparent figure background
+ax.set_title("Savings Distribution - Where You Stand", color='black')
+ax.set_ylabel("Total Savings (₹)", color='black')
+ax.set_xticklabels(users, rotation=30, color='black')
+ax.set_yticklabels(savings, color='black')
+st.pyplot(fig)
+
+st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
+
+# Public Accountability
+if st.button("Share My Progress on Social Media! 🎯"):
+    st.success("✅ Your savings progress has been shared successfully!")
     # Commitment Contracts Page
 elif page == "Commitment Contracts":
     st.title("📜 Financial Commitment Contracts")
