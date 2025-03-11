@@ -134,7 +134,6 @@ if page == "Home":
 elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
     st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
-
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("⏳ Your request has been placed. Withdrawals require a 24-hour delay before execution.")
 
