@@ -154,7 +154,7 @@ elif page == "Savings Tracker":
 
 def colored_metric(label, amount):
     color = "red" if amount < 0 else "green"
-return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
+    return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
 
     col1.markdown(f"<div style='text-align:center;'><b>Checking</b><br>{colored_metric('Checking', accounts['Checking'])}</div>", unsafe_allow_html=True)
     col2.markdown(f"<div style='text-align:center;'><b>Credit Card</b><br>{colored_metric('Credit Card', accounts['Credit Card'])}</div>", unsafe_allow_html=True)
