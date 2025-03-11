@@ -252,6 +252,10 @@ if page == "Savings Tracker":
     ]
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
+    # Finance Tip & News
+    if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
+        st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
+
 
     # Achievement Badges
     if progress > 0.75:
