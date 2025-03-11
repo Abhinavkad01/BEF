@@ -138,21 +138,21 @@ if "page" not in st.session_state:
 if st.session_state.page == "Savings Tracker":
     st.title("📈 Track Your Savings")
     st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
-    
+
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("⏳ Your request has been placed. Withdrawals require a 24-hour delay before execution.")
-    
+
     st.markdown("### 💰 Accounts Overview")
     accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
     col1, col2, col3 = st.columns(3)
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
-    
+
     # Expenses Overview Bar Chart
     st.subheader("📊 Expenses Overview")
     expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-    
+
     fig, ax = plt.subplots()
     ax.bar(expenses.keys(), expenses.values(), color=['blue', 'green', 'red', 'purple'])
     ax.set_ylabel("Amount (₹)")
@@ -204,19 +204,23 @@ if st.session_state.page == "Savings Tracker":
 
     # Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
-        tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
-        news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
+        tips = [
+            "Automate savings to avoid decision fatigue!",
+            "Invest at least 20% of your income.",
+            "Track expenses weekly to stay accountable."
+        ]
+        news = [
+            "Markets hit all-time high today!",
+            "New savings scheme launched by the government.",
+            "Top CEOs reveal their money-saving habits!"
+        ]
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
     # Achievement Badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
-        # Temptation Bundling - Pairing Finance Tips with News
-    if st.button("Get a Quick Finance Tip & News Update!"):
-    tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
-    news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
-    st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
+
 
     # Leaderboard Page
 elif page == "Leaderboard":
