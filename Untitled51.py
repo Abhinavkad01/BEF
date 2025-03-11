@@ -195,7 +195,7 @@ if page == "Savings Tracker":
 
         st.markdown(f"""
             <div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>
-                💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
+                 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
             </div>
         """, unsafe_allow_html=True)
 
