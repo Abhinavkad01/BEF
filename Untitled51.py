@@ -135,15 +135,14 @@ if page == "Home":
 st.title("📈 Track Your Savings")
 
 st.markdown("### 💰 Accounts Overview")
-    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Checking", f"₹{accounts['Checking']:,}")
-    col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
-    col3.metric("Savings", f"₹{accounts['Savings']:,}")
-    
-    st.subheader("📊 Expenses Overview")
-    expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-    st.write(expenses)
+accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
+col1, col2, col3 = st.columns(3)
+col1.metric("Checking", f"₹{accounts['Checking']:,}")
+col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
+col3.metric("Savings", f"₹{accounts['Savings']:,}")
+st.subheader("📊 Expenses Overview")
+expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
+st.write(expenses)
 # Savings Goals
 default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
 goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
