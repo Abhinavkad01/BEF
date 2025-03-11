@@ -130,26 +130,20 @@ if page == "Home":
         st.write(f"**{review['name']}** {review['rating']}")
         st.write(f"📝 {review['comment']}")
         st.divider()
+        
 # Page Title
 st.title("📈 Track Your Savings")
 
-# 🔹 Show Accounts Overview **ONLY on Savings Page**
-if "savings" in st.session_state.get("current_page", "savings"):  # Ensures it's only on this page
-    st.markdown("### 💰 Accounts Overview")
-
-    # Sample account data
-    accounts = {
-        "Checking": 25000,
-        "Credit Card": -5000,
-        "Savings": 80000
-    }
-
-    # Display accounts in columns for a neat layout
+st.markdown("### 💰 Accounts Overview")
+    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
     col1, col2, col3 = st.columns(3)
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
-
+    
+    st.subheader("📊 Expenses Overview")
+    expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
+    st.write(expenses)
 # Savings Goals
 default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
 goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
@@ -178,10 +172,6 @@ ax.set_ylabel("Savings (₹)", color='black')
 ax.set_title("Monthly Savings Over the Year", color='black')
 st.pyplot(fig)
 
-# Expense Tracking
-st.subheader("📊 Expenses Overview")
-expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-st.write(expenses)
 
 # Goals with Progress
 st.subheader("🎯 Future Goals")
