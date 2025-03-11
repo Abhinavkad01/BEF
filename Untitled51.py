@@ -91,7 +91,7 @@ def live_savings_counter():
         counter_placeholder.subheader(f"💸 ₹{total_savings} Cr saved by users!")
         time.sleep(1)
 # Lock-in Mechanism for Withdrawals
-if page == "Savings Tracker":
+elif page == "Savings Tracker":
     st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
     
 
