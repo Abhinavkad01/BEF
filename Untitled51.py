@@ -198,6 +198,7 @@ if page == "Savings Tracker":
                  <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
             </div>
         """, unsafe_allow_html=True)
+        
 
     # Loss Framing for Adjusting Savings Goal
     if st.button("Adjust Savings Goal", key="adjust_goal_button"):
