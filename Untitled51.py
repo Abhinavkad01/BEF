@@ -167,20 +167,21 @@ elif page == "Savings Tracker":
     ]
     
     for bill in bills:
-        days_remaining = (bill['due'] - today).days
-        if days_remaining <= 5:
-            bg_color = "#ffcccc"  # Red for urgent
-        elif days_remaining <= 10:
-            bg_color = "#ffebcc"  # Orange for upcoming
-        else:
-            bg_color = "#ccffcc"  # Green for later bills
-        
-        st.markdown(f"<div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>"
-                    f"{bill['name']} - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})</div>",
-                    unsafe_allow_html=True)
-        # Loss Framing for Withdrawals
-         if st.button("Adjust Savings Goal", key="adjust_goal_button"):
-            st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    days_remaining = (bill['due'] - today).days
+    if days_remaining <= 5:
+        bg_color = "#ffcccc"  # Red for urgent
+    elif days_remaining <= 10:
+        bg_color = "#ffebcc"  # Orange for upcoming
+    else:
+        bg_color = "#ccffcc"  # Green for later bills
+
+    st.markdown(f"<div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>"
+                f"💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})</div>",
+                unsafe_allow_html=True)
+
+# Loss Framing for Withdrawals
+if st.button("Adjust Savings Goal", key="adjust_goal_button"):
+    st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
