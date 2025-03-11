@@ -131,81 +131,86 @@ if page == "Home":
         st.write(f"📝 {review['comment']}")
         st.divider()
         
-# Page Title
-st.title("📈 Track Your Savings")
-
-st.markdown("### 💰 Accounts Overview")
-accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
-col1, col2, col3 = st.columns(3)
-col1.metric("Checking", f"₹{accounts['Checking']:,}")
-col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
-col3.metric("Savings", f"₹{accounts['Savings']:,}")
-st.subheader("📊 Expenses Overview")
-expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-st.write(expenses)
-# Savings Goals
-default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
-goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
-savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
-st.success(f"Your goal: ₹{savings_goal:,}")
-
-# Progress Bar
-saved_amount = np.random.randint(0, savings_goal)
-progress = saved_amount / savings_goal
-st.progress(progress)
-st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
-
-# Loss Framing for Withdrawals
-if st.button("Adjust Savings Goal"):
-    st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
-
-# Fake Monthly Savings Graph
-months = np.arange(1, 13)
-monthly_savings = np.random.randint(5000, 20000, size=12)
-fig, ax = plt.subplots(figsize=(5, 3))
-ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
-ax.set_facecolor("none")
-fig.patch.set_alpha(0)
-ax.set_xlabel("Month", color='black')
-ax.set_ylabel("Savings (₹)", color='black')
-ax.set_title("Monthly Savings Over the Year", color='black')
-st.pyplot(fig)
-
-
-# Goals with Progress
-st.subheader("🎯 Future Goals")
-goals = [
-    {"name": "Buy a Car", "total": 500000, "saved": random.randint(100000, 400000)},
-    {"name": "Go on a Vacation", "total": 200000, "saved": random.randint(50000, 150000)},
-    {"name": "Buy a House", "total": 2000000, "saved": random.randint(500000, 1500000)},
-    {"name": "Retirement Fund", "total": 5000000, "saved": random.randint(1000000, 4000000)}
-]
-for goal in goals:
-    st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
-
-# Suggested Savings Amounts
-st.subheader("💡 Suggested Savings")
-recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
-savings_choice = st.radio("Select a recommended amount:", recommended_savings, index=0)
-st.success(f"✅ You've chosen to save {savings_choice} per month!")
-
-# Finance Tip & News
-if st.button("Get a Quick Finance Tip & News Update!"):
-    tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
-    news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
-    st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
-
-# Achievement Badges
-if progress > 0.75:
-    st.balloons()
-    st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
-
-    # Temptation Bundling - Pairing Finance Tips with News
+# Savings Tracker Page
+if page == "Savings Tracker":
+    st.title("📈 Track Your Savings")
+    st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
+    
+    if st.button("Request Withdrawal"):
+        st.warning("⏳ Your request has been placed. Withdrawals require a 24-hour delay before execution.")
+    
+    st.markdown("### 💰 Accounts Overview")
+    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Checking", f"₹{accounts['Checking']:,}")
+    col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
+    col3.metric("Savings", f"₹{accounts['Savings']:,}")
+    
+    st.subheader("📊 Expenses Overview")
+    expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
+    plot_expenses_graph(expenses)
+    
+    # Savings Goals
+    default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
+    goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
+    savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
+    st.success(f"Your goal: ₹{savings_goal:,}")
+    
+    # Progress Bar
+    saved_amount = np.random.randint(0, savings_goal)
+    progress = saved_amount / savings_goal
+    st.progress(progress)
+    st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
+    
+    # Loss Framing for Withdrawals
+    if st.button("Adjust Savings Goal"):
+        st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    
+    # Fake Monthly Savings Graph
+    months = np.arange(1, 13)
+    monthly_savings = np.random.randint(5000, 20000, size=12)
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
+    ax.set_facecolor("none")
+    fig.patch.set_alpha(0)
+    ax.set_xlabel("Month", color='black')
+    ax.set_ylabel("Savings (₹)", color='black')
+    ax.set_title("Monthly Savings Over the Year", color='black')
+    st.pyplot(fig)
+    
+    # Goals with Progress
+    st.subheader("🎯 Future Goals")
+    goals = [
+        {"name": "Buy a Car", "total": 500000, "saved": random.randint(100000, 400000)},
+        {"name": "Go on a Vacation", "total": 200000, "saved": random.randint(50000, 150000)},
+        {"name": "Buy a House", "total": 2000000, "saved": random.randint(500000, 1500000)},
+        {"name": "Retirement Fund", "total": 5000000, "saved": random.randint(1000000, 4000000)}
+    ]
+    for goal in goals:
+        st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
+    
+    # Suggested Savings Amounts
+    st.subheader("💡 Suggested Savings")
+    recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
+    savings_choice = st.radio("Select a recommended amount:", recommended_savings, index=0)
+    st.success(f"✅ You've chosen to save {savings_choice} per month!")
+    
+    # Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!"):
         tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
         news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
-
+    
+    # Achievement Badges
+    if progress > 0.75:
+        st.balloons()
+        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
+    
+        # Temptation Bundling - Pairing Finance Tips with News
+        if st.button("Get a Quick Finance Tip & News Update!"):
+            tips = ["Automate savings to avoid decision fatigue!", "Invest at least 20% of your income.", "Track expenses weekly to stay accountable."]
+            news = ["Markets hit all-time high today!", "New savings scheme launched by the government.", "Top CEOs reveal their money-saving habits!"]
+            st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
     # Leaderboard Page
 elif page == "Leaderboard":
