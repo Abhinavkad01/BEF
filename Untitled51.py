@@ -191,7 +191,11 @@ elif page == "Savings Tracker":
     ax.set_title("Monthly Expenses")
     ax.tick_params(axis='x', rotation=30)  # Rotate x-axis labels for better readability
     st.pyplot(fig)
+    
     # Savings Goals
+    st.subheader("🌟 Set A New Savings Goal")
+    st.markdown("> **“Save today for a better tomorrow. Every rupee counts! 💪”**")
+
     default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
     goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
