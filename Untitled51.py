@@ -176,13 +176,13 @@ elif page == "Savings Tracker":
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
 
-    # New Element: Monthly Savings Pie Chart
+   # Monthly Savings Pie Chart
     st.subheader("📊 Monthly Savings Distribution")
     labels = ['Investments', 'Emergency Fund', 'Vacation Savings', 'Miscellaneous']
     data = [random.randint(5000, 20000) for _ in range(4)]
     fig, ax = plt.subplots(figsize=(5, 3))
-    ax.pie(data, labels=labels, autopct='%1.1f%%', colors=['#ff7f0e', '#aec7e8', '#1f77b4', '#ffbb78'])
-    ax.set_title("Savings Breakdown")
+    ax.pie(data, labels=labels, autopct='%1.1f%%', colors=['#b3cde8', '#85a9e0', '#6188d2', '#d3e5ff'])
+    ax.set_title("Savings Breakdown", fontsize=12, fontweight='bold')
     st.pyplot(fig)
 
 
