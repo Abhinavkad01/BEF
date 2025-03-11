@@ -139,14 +139,17 @@ elif page == "Savings Tracker":
 
     st.markdown("### 💰 Accounts Overview")
     accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
-    col1, col2, col3 = st.columns(3)
+    monthly_goal = random.randint(10000, 50000)
+    col1, col2, col3, col4 = st.columns(4)
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
+    col4.metric("🎯 Monthly Goal", f"₹{monthly_goal:,}")
+    
     
      # Loss Framing for Withdrawals
     if st.button("Request Withdrawal", key="withdraw_button"):
-        st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
+        st.warning("🔒⚠️ A withdrawal request has been placed. You can withdraw money after 24 hours.")
         
      # Upcoming Bills Reminder with Gradient Background
     st.subheader("📅 Upcoming Bills & Payments")
