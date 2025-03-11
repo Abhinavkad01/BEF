@@ -156,12 +156,12 @@ def colored_metric(label, amount):
     color = "red" if amount < 0 else "green"
     return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
 
-    col1.markdown(f"<div style='text-align:center;'><b>Checking</b><br>{colored_metric('Checking', accounts['Checking'])}</div>", unsafe_allow_html=True)
-    col2.markdown(f"<div style='text-align:center;'><b>Credit Card</b><br>{colored_metric('Credit Card', accounts['Credit Card'])}</div>", unsafe_allow_html=True)
-    col3.markdown(f"<div style='text-align:center;'><b>Savings</b><br>{colored_metric('Savings', accounts['Savings'])}</div>", unsafe_allow_html=True)
-    col4.markdown(f"<div style='text-align:center;'><b>🎯 Monthly Goal</b><br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span></div>", unsafe_allow_html=True)
-    col5.markdown(f"<div style='text-align:center;'><b>📌 Total Due</b><br>{colored_metric('Total Due', -total_due)}</div>", unsafe_allow_html=True)
-    # Progress Tracker
+    col1.markdown(f"**Checking**<br>{colored_metric('Checking', accounts['Checking'])}", unsafe_allow_html=True)
+    col2.markdown(f"**Credit Card**<br>{colored_metric('Credit Card', accounts['Credit Card'])}", unsafe_allow_html=True)
+    col3.markdown(f"**Savings**<br>{colored_metric('Savings', accounts['Savings'])}", unsafe_allow_html=True)
+    col4.markdown(f"**🎯 Monthly Goal**<br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span>", unsafe_allow_html=True)
+    col5.markdown(f"**📌 Total Due**<br>{colored_metric('Total Due', -total_due)}", unsafe_allow_html=True)
+# Progress Tracker
     savings_goal = monthly_goal  # Link the savings goal to the monthly goal
     saved_amount = accounts["Savings"]  # Link the saved amount to the savings account balance
     progress = saved_amount / savings_goal if savings_goal > 0 else 0
