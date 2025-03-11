@@ -157,16 +157,16 @@ elif page == "Savings Tracker":
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("🔒⚠️ A withdrawal request has been placed. You can withdraw money after 24 hours.")
         
-     # Upcoming Bills Reminder with Gradient Background
-    st.subheader("📅 Upcoming Bills & Payments")
-    today = datetime.today()
-    bills = [
-        {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
-        {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
-        {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
-    ]
-    
-    for bill in bills:
+    # Upcoming Bills Reminder with Gradient Background
+st.subheader("📅 Upcoming Bills & Payments")
+today = datetime.today()
+bills = [
+    {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
+    {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
+    {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
+]
+
+for bill in bills:
     days_remaining = (bill['due'] - today).days
     if days_remaining <= 5:
         bg_color = "#ffcccc"  # Red for urgent
@@ -175,13 +175,16 @@ elif page == "Savings Tracker":
     else:
         bg_color = "#ccffcc"  # Green for later bills
 
-    st.markdown(f"<div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>"
-                f"💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})</div>",
-                unsafe_allow_html=True)
+    st.markdown(f"""
+        <div style='background-color: {bg_color}; padding: 10px; border-radius: 5px;'>
+            💳 <b>{bill['name']}</b> - ₹{bill['amount']:,} (Due: {bill['due'].strftime('%d %b')})
+        </div>
+    """, unsafe_allow_html=True)
 
-# Loss Framing for Withdrawals
-    if st.button("Adjust Savings Goal", key="adjust_goal_button"):
-        st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+# Loss Framing for Adjusting Savings Goal
+if st.button("Adjust Savings Goal", key="adjust_goal_button"):
+    st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
