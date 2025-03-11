@@ -145,14 +145,18 @@ elif page == "Savings Tracker":
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
 
-    # Expenses Overview Bar Chart (Smaller Size)
+    # Expenses Overview Bar Chart
     st.subheader("📊 Expenses Overview")
     expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-    fig, ax = plt.subplots(figsize=(4, 2))  # Adjusted size
-    ax.bar(expenses.keys(), expenses.values(), color=['blue', 'green', 'red', 'purple'])
+    
+    fig, ax = plt.subplots(figsize=(4, 2.5))  # Smaller graph size
+    colors = ['#6C757D', '#ADB5BD', '#CED4DA', '#DEE2E6']  # Subtle color palette
+    ax.bar(expenses.keys(), expenses.values(), color=colors)
     ax.set_ylabel("Amount (₹)")
-    ax.set_title("Monthly Expenses")
+    ax.set_title("Monthly Expenses", fontsize=10)
+    ax.grid(axis='y', linestyle='--', alpha=0.6)
     st.pyplot(fig)
+    
     # Savings Goals
     default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
     goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
