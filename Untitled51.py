@@ -252,7 +252,23 @@ if page == "Savings Tracker":
     ]
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
-    # Finance Tip & News
+        
+   # Define finance tips and news
+   tips = [
+    "Start by saving at least 20% of your income every month.",
+    "Invest in index funds for long-term stable growth.",
+    "Avoid impulse spending by following the 24-hour rule.",
+    "Track your daily expenses to identify areas of overspending."
+     ]
+
+   news = [
+    "Stock markets saw a 2% rise amid positive economic reports.",
+    "Interest rates remain steady, affecting mortgage affordability.",
+    "New tax-saving investment schemes announced for 2025.",
+    "Crypto regulations tightened to prevent fraud."
+      ]
+
+# Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
