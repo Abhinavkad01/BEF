@@ -133,9 +133,7 @@ if page == "Home":
         
 elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
-    st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
-    if st.button("Request Withdrawal", key="withdraw_button"):
-        st.warning("⏳ Your request has been placed. Withdrawals require a 24-hour delay before execution.")
+    
 
     st.markdown("### 💰 Accounts Overview")
     accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
@@ -143,6 +141,11 @@ elif page == "Savings Tracker":
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
+    
+     # Loss Framing for Withdrawals
+    if st.button("Request Withdrawal", key="withdraw_button"):
+        st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
+    
 
     # Expenses Overview Bar Chart (Professional & Readable)
     st.subheader("📊 Expenses Overview")
