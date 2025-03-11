@@ -150,18 +150,29 @@ if page == "Savings Tracker":
 
     col1, col2, col3, col4, col5 = st.columns(5)
 
-def colored_metric(label, amount):
-    color = "red" if amount < 0 else "green"
-    return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
+    def colored_metric(label, amount):
+        color = "red" if amount < 0 else "green"
+        return f"<div style='text-align:center; color:{color}; font-weight:bold;'>₹{amount:,}</div>"
 
-  col1.markdown(f"<div style='text-align:center;'><b>Checking</b><br>{colored_metric('Checking', accounts['Checking'])}</div>", unsafe_allow_html=True)
-  col2.markdown(f"<div style='text-align:center;'><b>Credit Card</b><br>{colored_metric('Credit Card', accounts['Credit Card'])}</div>", unsafe_allow_html=True)
-  col3.markdown(f"<div style='text-align:center;'><b>Savings</b><br>{colored_metric('Savings', accounts['Savings'])}</div>", unsafe_allow_html=True)
-  col4.markdown(f"<div style='text-align:center;'><b>🎯 Monthly Goal</b><br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span></div>", unsafe_allow_html=True)
-  col5.markdown(f"<div style='text-align:center;'><b>📌 Total Due</b><br>{colored_metric('Total Due', -total_due)}</div>", unsafe_allow_html=True)
-# Progress Tracker
-    savings_goal = monthly_goal  # Link the savings goal to the monthly goal
-    saved_amount = accounts["Savings"]  # Link the saved amount to the savings account balance
+    col1.markdown(
+        f"<div style='text-align:center;'><b>Checking</b><br>{colored_metric('Checking', accounts['Checking'])}</div>", 
+        unsafe_allow_html=True)
+    col2.markdown(
+        f"<div style='text-align:center;'><b>Credit Card</b><br>{colored_metric('Credit Card', accounts['Credit Card'])}</div>", 
+        unsafe_allow_html=True)
+    col3.markdown(
+        f"<div style='text-align:center;'><b>Savings</b><br>{colored_metric('Savings', accounts['Savings'])}</div>", 
+        unsafe_allow_html=True)
+    col4.markdown(
+        f"<div style='text-align:center;'><b>🎯 Monthly Goal</b><br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span></div>", 
+        unsafe_allow_html=True)
+    col5.markdown(
+        f"<div style='text-align:center;'><b>📌 Total Due</b><br>{colored_metric('Total Due', -total_due)}</div>", 
+        unsafe_allow_html=True)
+
+    # Progress Tracker
+    savings_goal = monthly_goal
+    saved_amount = accounts["Savings"]
     progress = saved_amount / savings_goal if savings_goal > 0 else 0
     st.progress(progress)
     st.write(f"🎯 You've saved **₹{saved_amount:,}** out of **₹{savings_goal:,}**")
@@ -170,15 +181,9 @@ def colored_metric(label, amount):
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("🔒⚠️ A withdrawal request has been placed. You can withdraw money after 24 hours.")
 
-    # Upcoming Bills Reminder with Gradient Background
+    # Upcoming Bills Reminder
     st.subheader("📅 Upcoming Bills & Payments")
-    today = datetime.today()
-    bills = [
-        {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
-        {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
-        {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
-    ]
-
+    
     for bill in bills:
         days_remaining = (bill['due'] - today).days
         if days_remaining <= 5:
@@ -202,12 +207,12 @@ def colored_metric(label, amount):
     st.subheader("📊 Expenses Overview")
     expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
 
-    fig, ax = plt.subplots(figsize=(5, 3))  # Smaller size
-    colors = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78']  # Subtle, professional colors
+    fig, ax = plt.subplots(figsize=(5, 3))
+    colors = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78']
     ax.bar(expenses.keys(), expenses.values(), color=colors)
     ax.set_ylabel("Amount (₹)")
     ax.set_title("Monthly Expenses")
-    ax.tick_params(axis='x', rotation=30)  # Rotate x-axis labels for better readability
+    ax.tick_params(axis='x', rotation=30)
     st.pyplot(fig)
 
     # Savings Goals
@@ -218,15 +223,6 @@ def colored_metric(label, amount):
     goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
     st.success(f"Your goal: ₹{savings_goal:,}")
-
-    # Monthly Savings Pie Chart
-    st.subheader("📊 Monthly Savings Distribution")
-    labels = ['Investments', 'Emergency Fund', 'Vacation Savings', 'Miscellaneous']
-    data = [random.randint(5000, 20000) for _ in range(4)]
-    fig, ax = plt.subplots(figsize=(5, 3))
-    ax.pie(data, labels=labels, autopct='%1.1f%%', colors=['#b3cde8', '#85a9e0', '#6188d2', '#d3e5ff'])
-    ax.set_title("Savings Breakdown", fontsize=12, fontweight='bold')
-    st.pyplot(fig)
 
     # Transaction History Graph
     st.subheader("📈 Transaction History")
@@ -246,16 +242,6 @@ def colored_metric(label, amount):
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
-    # Fake Monthly Savings Graph
-    months = np.arange(1, 13)
-    monthly_savings = np.random.randint(5000, 20000, size=12)
-    fig, ax = plt.subplots(figsize=(5, 3))
-    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
-    ax.set_xlabel("Month")
-    ax.set_ylabel("Savings (₹)")
-    ax.set_title("Monthly Savings Over the Year")
-    st.pyplot(fig)
-
     # Goals with Progress
     st.subheader("🎯 Future Goals")
     goals = [
@@ -267,23 +253,10 @@ def colored_metric(label, amount):
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
 
-    # Suggested Savings Amounts
-    st.subheader("💡 Suggested Savings")
-    recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
-    savings_choice = st.radio("Select a recommended amount:", recommended_savings, index=0)
-    st.success(f"✅ You've chosen to save {savings_choice} per month!")
-
-    # Finance Tip & News
-    if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
-        st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
-
-        # Achievement Badges
+    # Achievement Badges
     if progress > 0.75:
         st.balloons()
-        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
-# Set page config
-st.set_page_config(page_title="Leaderboard", page_icon="🏆", layout="wide")
-
+        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
 
 # Leaderboard Page
 elif page == "Leaderboard":
