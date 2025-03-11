@@ -279,13 +279,19 @@ def colored_metric(label, amount):
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
 
-    # Achievement Badges
+        # Achievement Badges
     if progress > 0.75:
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
 
+# Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
+    
+    # Fake leaderboard
+    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
+    savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
+
 
     # Fake leaderboard
     users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
