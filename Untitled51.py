@@ -284,13 +284,12 @@ def colored_metric(label, amount):
         st.balloons()
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
 
-# Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
-    
+
     # Fake leaderboard
     users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
-    savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
+    savings = sorted([random.randint(50000, 300000) for _ in users], reverse=True)
     
     # Identify user's position
     user_savings = random.randint(50000, 200000)
