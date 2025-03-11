@@ -224,6 +224,15 @@ if page == "Savings Tracker":
     savings_goal = st.number_input("Enter your savings goal (₹)", min_value=1000, step=5000, value=default_goals[goal_type])
     st.success(f"Your goal: ₹{savings_goal:,}")
 
+    # Monthly Savings Pie Chart
+    st.subheader("📊 Monthly Savings Distribution")
+    labels = ['Investments', 'Emergency Fund', 'Vacation Savings', 'Miscellaneous']
+    data = [random.randint(5000, 20000) for _ in range(4)]
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.pie(data, labels=labels, autopct='%1.1f%%', colors=['#b3cde8', '#85a9e0', '#6188d2', '#d3e5ff'])
+    ax.set_title("Savings Breakdown", fontsize=12, fontweight='bold')
+    st.pyplot(fig)
+
     # Transaction History Graph
     st.subheader("📈 Transaction History")
     days_options = {"7 days": 7, "15 days": 15, "30 days": 30, "2 months": 60}
