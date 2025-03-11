@@ -137,32 +137,31 @@ elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
 
     # Accounts Overview with Total Due
-st.markdown("### 💰 Accounts Overview")
-accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 60000}
-monthly_goal = 87500  # Example static goal
+    st.markdown("### 💰 Accounts Overview")
+    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 60000}
+    monthly_goal = 87500  # Example static goal
 
-today = datetime.today()
-bills = [
-    {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
-    {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
-    {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
-]
+    today = datetime.today()
+    bills = [
+        {"name": "⚡ Electricity Bill", "amount": 2500, "due": datetime(2025, 3, 15)},
+        {"name": "🌐 Internet Bill", "amount": 1200, "due": datetime(2025, 3, 20)},
+        {"name": "💳 Credit Card Payment", "amount": 5000, "due": datetime(2025, 3, 25)}
+    ]
 
-total_due = sum(bill['amount'] for bill in bills)
+    total_due = sum(bill['amount'] for bill in bills)
 
-col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
-# Function to color amounts based on value
-def colored_metric(label, amount):
-    color = "red" if amount < 0 else "green"
-    return f"<span style='color:{color}; font-weight:bold;'>₹{amount:,}</span>"
+    # Function to color amounts based on value
+    def colored_metric(label, amount):
+        color = "red" if amount < 0 else "green"
+        return f"<span style='color:{color}; font-weight:bold;'>₹{amount:,}</span>"
 
-col1.markdown(f"**Checking**<br>{colored_metric('Checking', accounts['Checking'])}", unsafe_allow_html=True)
-col2.markdown(f"**Credit Card**<br>{colored_metric('Credit Card', accounts['Credit Card'])}", unsafe_allow_html=True)
-col3.markdown(f"**Savings**<br>{colored_metric('Savings', accounts['Savings'])}", unsafe_allow_html=True)
-col4.markdown(f"**🎯 Monthly Goal**<br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span>", unsafe_allow_html=True)
-col5.markdown(f"**📌 Total Due**<br>{colored_metric('Total Due', -total_due)}", unsafe_allow_html=True)
-
+    col1.markdown(f"**Checking**<br>{colored_metric('Checking', accounts['Checking'])}", unsafe_allow_html=True)
+    col2.markdown(f"**Credit Card**<br>{colored_metric('Credit Card', accounts['Credit Card'])}", unsafe_allow_html=True)
+    col3.markdown(f"**Savings**<br>{colored_metric('Savings', accounts['Savings'])}", unsafe_allow_html=True)
+    col4.markdown(f"**🎯 Monthly Goal**<br><span style='color:green; font-weight:bold;'>₹{monthly_goal:,}</span>", unsafe_allow_html=True)
+    col5.markdown(f"**📌 Total Due**<br>{colored_metric('Total Due', -total_due)}", unsafe_allow_html=True)
     # Progress Tracker
     savings_goal = monthly_goal  # Link the savings goal to the monthly goal
     saved_amount = accounts["Savings"]  # Link the saved amount to the savings account balance
