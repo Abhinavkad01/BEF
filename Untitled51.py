@@ -138,8 +138,8 @@ elif page == "Savings Tracker":
     
 
     st.markdown("### 💰 Accounts Overview")
-    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 80000}
-    monthly_goal = random.randint(10000, 50000)
+    accounts = {"Checking": 25000, "Credit Card": -5000, "Savings": 60000}
+    monthly_goal = random.randint(85000, 90000)
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Checking", f"₹{accounts['Checking']:,}")
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
