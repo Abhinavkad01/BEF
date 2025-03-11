@@ -133,7 +133,7 @@ if page == "Home":
 
 ## Saving Tracker Pgae
         
-elif page == "Savings Tracker":
+if page == "Savings Tracker":
     st.title("📈 Track Your Savings")
 
     # Accounts Overview with Total Due
@@ -285,7 +285,7 @@ def colored_metric(label, amount):
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")        
 
 # Leaderboard Page
-if page == "Leaderboard":
+   elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
     
     # Fake leaderboard
