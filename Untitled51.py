@@ -129,6 +129,8 @@ if page == "Home":
         st.write(f"**{review['name']}** {review['rating']}")
         st.write(f"📝 {review['comment']}")
         st.divider()
+
+## Saving Tracker Pgae
         
 elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
@@ -144,6 +146,11 @@ elif page == "Savings Tracker":
      # Loss Framing for Withdrawals
     if st.button("Request Withdrawal", key="withdraw_button"):
         st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
+    # New Element: Upcoming Bills Reminder
+    st.subheader("📅 Upcoming Bills")
+    upcoming_bills = {"Credit Card Payment": "₹5,000 - March 15", "Electricity Bill": "₹2,500 - March 20", "Internet Bill": "₹1,000 - March 25"}
+    for bill, date in upcoming_bills.items():
+        st.warning(f"📌 {bill}: {date}")
     
 
     # Expenses Overview Bar Chart (Professional & Readable)
@@ -199,6 +206,7 @@ elif page == "Savings Tracker":
     ax.set_title("Monthly Savings Over the Year")
     st.pyplot(fig)
 
+    
     # Goals with Progress
     st.subheader("🎯 Future Goals")
     goals = [
@@ -209,7 +217,7 @@ elif page == "Savings Tracker":
     ]
     for goal in goals:
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
-
+    
     # Suggested Savings Amounts
     st.subheader("💡 Suggested Savings")
     recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
