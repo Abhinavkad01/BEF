@@ -131,11 +131,7 @@ if page == "Home":
         st.write(f"📝 {review['comment']}")
         st.divider()
         
-# Savings Tracker Page
-if "page" not in st.session_state:
-    st.session_state.page = "Savings Tracker"
-
-if st.session_state.page == "Savings Tracker":
+elif page == "Savings Tracker":
     st.title("📈 Track Your Savings")
     st.warning("🔒 Lock-in Mechanism: Your savings are secured until the set date. Withdrawals allowed only in emergencies.")
 
@@ -149,16 +145,14 @@ if st.session_state.page == "Savings Tracker":
     col2.metric("Credit Card", f"₹{accounts['Credit Card']:,}")
     col3.metric("Savings", f"₹{accounts['Savings']:,}")
 
-    # Expenses Overview Bar Chart
+    # Expenses Overview Bar Chart (Smaller Size)
     st.subheader("📊 Expenses Overview")
     expenses = {"Groceries": 6000, "Transport": 4000, "Health": 3000, "Entertainment": 2000}
-
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(4, 2))  # Adjusted size
     ax.bar(expenses.keys(), expenses.values(), color=['blue', 'green', 'red', 'purple'])
     ax.set_ylabel("Amount (₹)")
     ax.set_title("Monthly Expenses")
     st.pyplot(fig)
-
     # Savings Goals
     default_goals = {"Emergency Fund": 50000, "Vacation": 100000, "Retirement": 1000000}
     goal_type = st.selectbox("Choose a savings goal:", list(default_goals.keys()))
@@ -219,10 +213,7 @@ if st.session_state.page == "Savings Tracker":
     # Achievement Badges
     if progress > 0.75:
         st.balloons()
-        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
-
-
-    # Leaderboard Page
+        st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")    # Leaderboard Page
 elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
     
