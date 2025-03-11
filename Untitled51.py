@@ -171,7 +171,23 @@ elif page == "Savings Tracker":
     # Loss Framing for Withdrawals
     if st.button("Adjust Savings Goal", key="adjust_goal_button"):
         st.warning("⚠️ Reducing your goal now could delay your financial freedom by 2 years!")
+    # Transaction History Graph
+    st.subheader("📈 Transaction History")
+    days_options = {"7 days": 7, "15 days": 15, "30 days": 30, "2 months": 60}
+    selected_days = st.radio("Select duration:", list(days_options.keys()), horizontal=True)
+    days = np.arange(1, days_options[selected_days] + 1)
+    deposits = np.random.randint(1000, 5000, size=len(days))
+    expenses = np.random.randint(2000, 10000, size=len(days))
 
+    fig, ax = plt.subplots(figsize=(6, 3))
+    ax.plot(days, deposits, marker='o', linestyle='-', color='green', label='Deposit')
+    ax.plot(days, expenses, marker='o', linestyle='-', color='red', label='Expense')
+    ax.set_xlabel("Day")
+    ax.set_ylabel("Amount (₹)")
+    ax.set_title("Transaction History")
+    ax.legend()
+    ax.tick_params(axis='x', rotation=45)
+    st.pyplot(fig)
     # Fake Monthly Savings Graph
     months = np.arange(1, 13)
     monthly_savings = np.random.randint(5000, 20000, size=12)
