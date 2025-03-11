@@ -242,6 +242,17 @@ if page == "Savings Tracker":
     ax.tick_params(axis='x', rotation=45)
     st.pyplot(fig)
 
+    # Fake Monthly Savings Graph
+    months = np.arange(1, 13)
+    monthly_savings = np.random.randint(5000, 20000, size=12)
+    fig, ax = plt.subplots(figsize=(5, 3))
+    ax.plot(months, monthly_savings, marker='o', linestyle='-', color='blue')
+    ax.set_xlabel("Month")
+    ax.set_ylabel("Savings (₹)")
+    ax.set_title("Monthly Savings Over the Year")
+    st.pyplot(fig)
+
+
    # Goals with Progress
     st.subheader("🎯 Future Goals")
     goals = [
