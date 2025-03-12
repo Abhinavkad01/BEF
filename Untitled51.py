@@ -185,15 +185,15 @@ if page == "Savings Tracker":
         # Financial Wellness Score
     st.subheader("💡 Financial Wellness Score")
 
-    wellness_score = random.randint(50, 100)  # Random score between 50-100
-    percentile = random.randint(60, 95)  # Random percentile between 60-95
+    wellness_score = random.randint(85, 100)  # Random score between 50-100
+    percentile = random.randint(80, 90)  # Random percentile between 60-95
 
     st.markdown(f"""
         <div style='text-align:center; font-size:24px; font-weight:bold; color:#2E86C1;'>
             Your Financial Wellness Score: {wellness_score}/100
         </div>
         <div style='text-align:center; font-size:18px; color:#566573;'>
-            You're in the top {percentile} percentile of users!
+            💪 You're in the top {percentile} percentile of users! 🔥
         </div>
     """, unsafe_allow_html=True)
 
