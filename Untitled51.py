@@ -185,7 +185,7 @@ if page == "Savings Tracker":
         # Financial Wellness Score
     st.subheader("💡 Financial Wellness Score")
 
-    wellness_score = random.randint(85, 100)  # Random score between 50-100
+    wellness_score = random.randint(85, 90)  # Random score between 50-100
     percentile = random.randint(80, 90)  # Random percentile between 60-95
 
     st.markdown(f"""
