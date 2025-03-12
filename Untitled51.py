@@ -325,11 +325,13 @@ if page == "Savings Tracker":
         st.success("🏆 You've unlocked the **Super Saver Badge!** Keep going!")
 # Leaderboard Page
 elif page == "Leaderboard":
+    
     st.title("🏆 Savings Leaderboard")
     users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
     savings = sorted([np.random.randint(50000, 300000) for _ in users], reverse=True)
     user_savings = random.randint(50000, 200000)
     rank = sum(user_savings < np.array(savings))
+    
 
     fig, ax = plt.subplots()
     colors = ["#B0C4DE" if s != user_savings else "#FF6347" for s in savings]
@@ -342,6 +344,36 @@ elif page == "Leaderboard":
 
     if st.button("Share My Progress on Social Media! 🎯"):
         st.success("✅ Your savings progress has been shared successfully!")
+    
+    st.title("🏆 Savings Leaderboard")
+
+    users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
+    savings = [random.randint(50000, 300000) for _ in users]
+    user_savings = random.randint(50000, 200000)
+
+  # Sort savings in descending order while keeping track of users
+    sorted_data = sorted(zip(users, savings), key=lambda x: x[1], reverse=True)
+    users, savings = zip(*sorted_data)
+
+# Rank of 'You'
+   user_index = users.index("You")
+   rank = sum(user_savings < np.array(savings))
+
+# Assign colors
+   colors = [
+    "#B0C4DE" if user == "You" else "#FF6347" if savings[i] < user_savings else "#98FB98"
+    for i, user in enumerate(users)
+]
+
+   # Plot
+   fig, ax = plt.subplots()
+   ax.bar(users, savings, color=colors)
+   ax.set_title("Savings Distribution - Where You Stand")
+   ax.set_ylabel("Total Savings (₹)")
+   ax.set_xticklabels(users, rotation=30)
+
+   st.pyplot(fig)
+   st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
     # Commitment Contracts Page
 elif page == "Commitment Contracts":
     st.title("📜 Financial Commitment Contracts")
