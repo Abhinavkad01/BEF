@@ -183,7 +183,7 @@ if page == "Savings Tracker":
         st.warning("🔒⚠️ A withdrawal request has been placed. You can withdraw money after 24 hours.")
 
         # Financial Wellness Score
-    st.subheader("💡 Financial Wellness Score")
+    st.subheader("")
 
     wellness_score = random.randint(85, 90)  # Random score between 50-100
     percentile = random.randint(80, 90)  # Random percentile between 60-95
