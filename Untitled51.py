@@ -273,7 +273,9 @@ if page == "Savings Tracker":
     ]
     
     for goal in goals:
+        sremaining = goal['total'] - goal['saved']
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
+        st.write(f"📉 Need to save more: ₹{remaining:,}")
 
     # Define finance tips and news
     tips = [
