@@ -330,18 +330,14 @@ elif page == "Leaderboard":
     st.title("🏆 Savings Leaderboard")
 
     users = ["Rahul", "Sneha", "Amit", "Priya", "Vikram", "You"]
-    savings = [random.randint(50000, 300000) for _ in users]
-    user_savings = random.randint(50000, 200000)
+    savings = {user: random.randint(50000, 300000) for user in users}
+    user_savings = savings["You"]
 
     # Sort savings in descending order while keeping track of users
-    sorted_data = sorted(zip(users, savings), key=lambda x: x[1], reverse=True)
+    sorted_data = sorted(savings.items(), key=lambda x: x[1], reverse=True)
     users, savings = zip(*sorted_data)
 
-    # Rank of 'You'
-    user_index = users.index("You")
-    rank = sum(user_savings < np.array(savings))
-
-    # Assign colors
+    # Assign colors based on savings
     colors = [
         "#B0C4DE" if user == "You" else "#FF6347" if savings[i] < user_savings else "#98FB98"
         for i, user in enumerate(users)
@@ -355,11 +351,10 @@ elif page == "Leaderboard":
     ax.set_xticklabels(users, rotation=30)
 
     st.pyplot(fig)
-    st.info(f"📊 Your savings are in the **top {100 - (rank * 20)}%** of users your age!")
+    st.info(f"📊 Your savings are in the **top {100 - (users.index('You') * 20)}%** of users your age!")
 
     if st.button("Share My Progress on Social Media! 🎯"):
-        st.success("✅ Your savings progress has been shared successfully!")    # Commitment Contracts Page
-elif page == "Commitment Contracts":
+        st.success("✅ Your savings progress has been shared successfully!")elif page == "Commitment Contracts":
     st.title("📜 Financial Commitment Contracts")
     st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
     
