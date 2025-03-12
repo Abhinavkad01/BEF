@@ -309,7 +309,7 @@ if page == "Savings Tracker":
     ]
 
     # Suggested Savings Amounts
-    st.subheader("💡 Suggested Savings")
+    st.subheader("💡 Suggested Additional Savings")
     recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
     savings_choice = st.radio("Select a recommended amount:", recommended_savings, index=0)
     st.success(f"✅ You've chosen to save {savings_choice} per month!")
