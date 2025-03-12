@@ -197,8 +197,6 @@ if page == "Savings Tracker":
         </div>
     """, unsafe_allow_html=True)
 
-    # Upcoming Bills Reminder
-    st.subheader("📅 Upcoming Bills & Payments")
 
     # Upcoming Bills Reminder
     st.subheader("📅 Upcoming Bills & Payments")
