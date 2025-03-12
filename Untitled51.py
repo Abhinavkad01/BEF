@@ -295,17 +295,17 @@ if page == "Savings Tracker":
 
     # Define finance tips and news
     tips = [
-        "Start by saving at least 20% of your income every month.",
-        "Invest in index funds for long-term stable growth.",
-        "Avoid impulse spending by following the 24-hour rule.",
-        "Track your daily expenses to identify areas of overspending."
+    "Set up a SIP to automate long-term wealth creation.",
+    "Avoid checking stock prices daily to reduce impulsive decision-making.",
+    "Reinvest dividends to take advantage of compounding over time.",
+    "Use goal-based investing to stay committed to long-term financial targets."
     ]
 
     news = [
-        "Stock markets saw a 2% rise amid positive economic reports.",
-        "Interest rates remain steady, affecting mortgage affordability.",
-        "New tax-saving investment schemes announced for 2025.",
-        "Crypto regulations tightened to prevent fraud."
+    "S&P 500 delivers 12% annualized returns over the last decade, reinforcing long-term investing benefits.",
+    "Gold prices surge 8% YTD as investors seek safe-haven assets amid market uncertainty.",
+    "New government bonds offer 7.5% fixed returns, attracting risk-averse investors.",
+    "Tech stocks rally 15% this quarter, outperforming broader indices."
     ]
 
     # Finance Tip & News
