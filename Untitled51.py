@@ -354,7 +354,8 @@ elif page == "Leaderboard":
     st.info(f"📊 Your savings are in the **top {100 - (users.index('You') * 20)}%** of users your age!")
 
     if st.button("Share My Progress on Social Media! 🎯"):
-        st.success("✅ Your savings progress has been shared successfully!")elif page == "Commitment Contracts":
+        st.success("✅ Your savings progress has been shared successfully!")
+elif page == "Commitment Contracts":
     st.title("📜 Financial Commitment Contracts")
     st.write("Set up a commitment contract where you wager money to stay on track with your savings goals!")
     
