@@ -308,6 +308,12 @@ if page == "Savings Tracker":
     "Tech stocks rally 15% this quarter, outperforming broader indices."
     ]
 
+    # Suggested Savings Amounts
+    st.subheader("💡 Suggested Savings")
+    recommended_savings = ["₹5,000 (Beginner)", "₹10,000 (Intermediate)", "₹20,000 (Advanced)"]
+    savings_choice = st.radio("Select a recommended amount:", recommended_savings, index=0)
+    st.success(f"✅ You've chosen to save {savings_choice} per month!")
+
     # Finance Tip & News
     if st.button("Get a Quick Finance Tip & News Update!", key="finance_news"):
         st.info(f"💡 {random.choice(tips)} | 📰 {random.choice(news)}")
