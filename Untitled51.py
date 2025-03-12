@@ -10,6 +10,7 @@ import numpy as np
 import time
 import random
 from datetime import datetime
+import random
 
 # Set page config - MUST BE FIRST
 st.set_page_config(page_title="Smart Savings", page_icon="💰", layout="wide")
@@ -273,7 +274,7 @@ if page == "Savings Tracker":
     ]
     
     for goal in goals:
-        sremaining = goal['total'] - goal['saved']
+        remaining = max(goal['total'] - goal['saved'], 0)  # Ensuring it doesn't go negative
         st.write(f"🔜 {goal['name']} - Saved: ₹{goal['saved']:,} / ₹{goal['total']:,}")
         st.write(f"📉 Need to save more: ₹{remaining:,}")
 
